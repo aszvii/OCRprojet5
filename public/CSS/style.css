@@ -1,0 +1,270 @@
+body{
+	font-family: Arial narrow, sans serif;
+	background-color: black;
+	margin: 0px;
+	z-index: 1;
+}
+
+header{
+	padding-top: 100px;
+}
+
+#fixedMenu{
+	background-color: black;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100px;
+	z-index: 900;
+}
+
+#listMenu, #profilMenu{
+	position: relative;
+}
+
+#menuBar:hover i, #profilMenu:hover i{
+	color: orange;
+}
+
+
+#listMenu ul{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	font-size: 25px;
+	text-align: center;
+	border-top: 1px solid white;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
+	background-color: black;
+	min-width: 250px;
+}
+
+#profilMenu ul{
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	font-size: 25px;
+	text-align: center;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-bottom: 1px solid white;
+	background-color: black;
+	min-width: 250px;
+}
+
+#listMenu li, #profilMenu li{
+	border-bottom: 2px solid white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#listMenu a, #profilMenu a{
+	color: orange;
+	text-decoration: none;
+}
+
+#listMenu a:hover li, #profilMenu a:hover li{
+	background-color: white;
+	color: black;
+	font-weight: bold;
+}
+
+#brandMenu a{
+	text-decoration: none;
+	color: white;
+	font-size: 45px;
+}
+
+#brandMenu a:hover{
+	color: orange;
+}
+
+
+.fa-bars{
+	font-size: 80px;
+	color: white;
+	padding: 10px;
+	border: 1px solid white;
+}
+
+.fa-user-circle{
+	font-size: 80px;
+	color: white;
+	padding: 10px;
+}
+
+
+
+#slider{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#sliderContent{
+	position: absolute;
+	top: 50px;
+}
+
+#imgSlider img{
+	width: 100%;
+	opacity: 0.5;
+}
+
+#textSlider{
+	display: flex;
+	flex-direction: column;
+}
+
+#textSlider h2{
+	font-size: 90px;
+	color: white;
+	margin: 15px;
+}
+
+#textSlider p{
+	font-size: 30px;
+	color: white;
+	margin: 15px;
+	font-style: italic;
+}
+
+#sliderButton{
+	align-self: center;
+	margin-top: 100px;
+}
+
+#sliderButton button{
+	background-color: orange;
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+#sliderButton a{
+	text-decoration: none;
+	color: black;
+}
+
+#sliderButton a:hover{
+	color: white;
+}
+
+
+
+
+
+
+#postSection, #searchSection{
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: black;
+	border: 2px solid black;
+	padding-bottom: 85px;
+}
+
+#postSection h2, #searchSection h2{
+	font-size: 35px;
+	color: black;
+}
+
+
+.evtsPost{
+	width: 70%;
+	margin-top: 70px;
+	border-top: 15px solid orange;
+	border-bottom: 10px solid orange;
+	border-right: 4px solid orange;
+	border-left: 4px solid orange;
+}
+
+#evtsPlaceDate{
+	font-size: 20px;
+	font-style: italic;
+	text-align: center;
+	background-color: orange;
+	color: white;
+	margin-top: 0px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	padding-left: 10px;
+	padding-bottom: 15px;
+}
+
+#evtsPostTitle{
+	text-align: center;
+	font-size: 35px;
+	margin-top: 0px;
+	padding-right: 10px;
+	margin-bottom: 0px;
+	padding-left: 10px;
+	background-color: black;
+	color: white;
+}
+
+#evtsPlaceDate em{
+	font-style: normal;
+	font-weight: bold;
+}
+
+
+#postDescript{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: left;
+	font-size: 20px;
+	border: 4px solid black;
+}
+
+#seeEvtsLinkPost{
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+#seeEvtsLinkPost a{
+	color: black;
+}
+
+#seeEvtsLinkPost a:hover{
+	color: white;
+}
+
+
+
+#postSectionFormDiv{
+	display: flex;
+	width: 70%;
+	justify-content: space-around;
+}
+
+
+
+
+
