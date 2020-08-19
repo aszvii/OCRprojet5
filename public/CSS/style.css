@@ -31,7 +31,7 @@ header{
 }
 
 
-#listMenu ul{
+#listMenuRoll{
 	display: none;
 	position: absolute;
 	top: 0;
@@ -48,7 +48,15 @@ header{
 	min-width: 250px;
 }
 
-#profilMenu ul{
+#listMenuRoll i, #profilMenuRoll i{
+	color: white;
+}
+
+#listMenuRoll i:hover{
+	color: orange;
+}
+
+#profilMenuRoll{
 	display: none;
 	position: absolute;
 	top: 0;
@@ -80,6 +88,11 @@ header{
 	background-color: white;
 	color: black;
 	font-weight: bold;
+}
+
+
+#profilMenu p a:hover{
+	color: white;
 }
 
 #brandMenu a{
@@ -192,6 +205,16 @@ header{
 	border-bottom: 10px solid orange;
 	border-right: 4px solid orange;
 	border-left: 4px solid orange;
+}
+
+
+.evtsPost h3 a{
+	color: white;
+	text-decoration: none;
+}
+
+.evtsPost h3 a:hover{
+	color: orange;
 }
 
 #evtsPlaceDate{

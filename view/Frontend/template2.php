@@ -37,7 +37,7 @@
 						<a id="menuBar" href=""><i class="fas fa-bars"></i></a>
 
 						
-						<ul>
+						<ul id="listMenuRoll">
 							<a href=""><li><i class="fas fa-window-close"></i></li></a>
 							<a href=""><li>Accueil</li></a>
 							<a href=""><li>Évènements</li></a>
@@ -54,7 +54,7 @@
 					<div id="profilMenu">
 						<a href=""><i class="fas fa-user-circle"></i></a>
 
-						<ul>
+						<ul id="profilMenuRoll">
 							<a href=""><li><i class="fas fa-window-close"></i></li></a>
 							<a href=""><li>Modifier mon profil</li></a>
 							<a href=""><li>Créer un évènement</li></a>

@@ -5,16 +5,30 @@
 require('controller/frontend.php');
 
 
-if(isset($_GET['action'])){
+try{
+	if(isset($_GET['action'])){
 
-	if($_GET['action']=='listEvents'){
+		if($_GET['action']=='listEvents'){
 
-		listEvents();
+			listEvents();
+		}
+
+		elseif($_GET['action']=="event"){
+			event();
+		}
+
+		elseif($_GET['action']=="register"){
+			register();
+		}
 	}
-	elseif($_GET['action']=="event"){
-		event();
-	}
-}
-else{
+
+
+	else{
 	listEvents();
+	}
+
+}
+catch(Exception $e){
+
+	echo 'Erreur: '. $e->getMessage();
 }
