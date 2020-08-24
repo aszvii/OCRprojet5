@@ -1,13 +1,17 @@
 <?php
 
 
-require_once('model/EventsManager.php');
-require_once('model/CommentsManager.php');
+/*require_once('model/EventsManager.php');
+require_once('model/CommentsManager.php');*/
+
+require('vendor/autoload.php');
+
+use App\model\EventsManager;
 
 
 function listEvents(){
 
-	$eventsManager = new \OCR\Blog\Model\EventsManager();
+	$eventsManager = new EventsManager();    //$eventsManager=new EventsManager();
 
 	$req=$eventsManager->getEvents();
 
@@ -17,7 +21,7 @@ function listEvents(){
 	}
 	else{
 
-		require('view/Frontend/listEventsView.php');
+		require('App/view/Frontend/listEventsView.php');
 	}
 
 }

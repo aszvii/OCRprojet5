@@ -2,7 +2,7 @@
 
 
 
-require('controller/frontend.php');
+require('App/controller/frontend.php');
 
 
 try{
@@ -24,7 +24,7 @@ try{
 
 
 	else{
-	listEvents();
+		listEvents();
 	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace OCR\Blog\Model;
+namespace App\model;
 
 class Manager
 {

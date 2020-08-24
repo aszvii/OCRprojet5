@@ -1,9 +1,12 @@
 <?php
 
-namespace OCR\Blog\Model;
+namespace App\model;  // La classe EventsManager est dans le namespace App\model
 
-require_once('model/Manager.php');
+//require_once('model/Manager.php');
 
+require_once('vendor/autoload.php');
+
+use App\model\Manager;
 
 class EventsManager extends Manager
 {

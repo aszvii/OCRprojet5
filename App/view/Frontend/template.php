@@ -11,7 +11,7 @@
 
 			<meta name="description" content="Blog">
 
-			<link rel="stylesheet" href="public/CSS/style.css">
+			<link rel="stylesheet" href="App/public/CSS/style.css">
 
 			<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
 
@@ -87,7 +87,7 @@ else{
 
 				<div id="slider">
 					<div id="imgSlider">
-						<img src="public/CSS/IMG/slider1.png">
+						<img src="App/public/CSS/IMG/slider1.png">
 					</div>
 					<div id="sliderContent">
 						<div id="textSlider">
@@ -114,7 +114,7 @@ else{
 			</footer>
 
 
-			<script src="javascript/p5.js"></script>
+			
 		</body>
 		
 	</html>

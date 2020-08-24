@@ -1,8 +1,8 @@
 {
-    "name": "test/ons",
+    "name": "projet/5",
     "require": {},
 	"autoload": {
 		"psr-4" : {
-		"model\\" : "model"}
+		"App\\" : "App"}
 	}
 }

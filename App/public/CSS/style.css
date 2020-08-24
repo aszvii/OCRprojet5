@@ -1,12 +1,17 @@
 body{
 	font-family: Arial narrow, sans serif;
-	background-color: black;
+	background-color: white;
 	margin: 0px;
 	z-index: 1;
 }
 
 header{
 	padding-top: 100px;
+}
+
+footer{
+	height: 90px;
+    background-color: black;
 }
 
 #fixedMenu{
@@ -188,7 +193,6 @@ header{
 	flex-direction: column;
 	align-items: center;
 	color: black;
-	border: 2px solid black;
 	padding-bottom: 85px;
 }
 
