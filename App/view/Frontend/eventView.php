@@ -11,6 +11,24 @@
 
 <section id="postSection">
 
+<?php if (isset($_SESSION['id'])): ?>
+
+    <div id="inscriptionButton">
+
+<?php if($verif->rowCount()==0){ ?>
+        <p><a href="index.php?action=eventInscription&id=<?= $data['id'] ?>">Je serais présent à cet évènement</a></p>
+<?php }
+      else{ ?>
+
+        <p>Vous participez à cet évènement</p>   <!--Mettre bouton pour se désinscrire-->
+<?php
+      }
+?>
+
+    </div>
+
+<?php endif; ?>
+
 
 	<div class="evtsPost">
 		<p id="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?>, le <?= $data['date_evts_fr'] ?></em></p>
@@ -24,27 +42,14 @@
 
 
 
-<?php   if(isset($_SESSION) && isset($_SESSION['type'])){
-            if($_SESSION['type']==1){
-
-?>              <p><em><a id="modifLink" href="index.php?action=modifyPostPage&id=<?=$_GET['id']?>">Modifier</a></em>
-                <em><a id="deleteLink" href="index.php?action=deletePost&id=<?=$_GET['id']?>">Supprimer</a></em>
-                <em><a href="index.php?action=adminPost">Voir tous les billets</a></em></p>
-<?php
-            }
-        }
-?>
-                    </div>
-        	</div>
-
-            <div id="postCommentDiv">
-        	   <h2>Commentaires</h2>
+            <div id="eventCommentDiv">
+        	   <h3>Commentaires</h3>
 
             <?php 
-            if(isset($_SESSION['pseudo'])){
+            if(isset($_SESSION['id'])){
             ?>
 
-                <form method="post" action="index.php?action=addComment&id=<?= $post['id'] ?>">
+                <form method="post" action="index.php?action=addComment&id=<?= $data['id'] ?>">
 
                     <div>
                         <label for="comment">Laissez votre commentaire</label><br/>
@@ -59,7 +64,10 @@
            <?php
            }
            ?> 
-                    <div id="postCommentsContent">
+
+
+
+                    <div id="eventCommentsContent">
     <?php
         if($comments->rowCount()==0){
             echo 'Soyez le premier à commenter cet article';
@@ -98,12 +106,21 @@
                 
    	<?php
 
-            $comments->closeCursor();
 
         	}
         }
 
+        $comments->closeCursor();
+
    	?>
+
+
+<?php if (!isset($_SESSION['id'])): ?>
+
+    <p id="connectToComment">Connectez vous pour commenter</p>
+
+<?php endif; ?>
+
 
    		</div>
    		

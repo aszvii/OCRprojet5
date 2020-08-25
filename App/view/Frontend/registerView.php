@@ -7,7 +7,7 @@
 <section id="registerDiv">
 
 	<div id="imgRegisterSlider">
-		<img src="public/CSS/IMG/slider1.png">
+		<img src="App/public/CSS/IMG/slider1.png">
 	</div>
 
 	
@@ -38,4 +38,4 @@
 
 <?php $content= ob_get_clean(); ?>
 
-<?php require ('view/Frontend/template2.php'); ?>
+<?php require ('App/view/Frontend/template2.php'); ?>

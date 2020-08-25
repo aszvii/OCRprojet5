@@ -1,17 +1,17 @@
 <?php
 
 
-/*require_once('model/EventsManager.php');
-require_once('model/CommentsManager.php');*/
 
 require('vendor/autoload.php');
 
 use App\model\EventsManager;
+use App\model\CommentsManager;
+use App\model\UserManager;
 
 
 function listEvents(){
 
-	$eventsManager = new EventsManager();    //$eventsManager=new EventsManager();
+	$eventsManager = new EventsManager();   
 
 	$req=$eventsManager->getEvents();
 
@@ -29,12 +29,14 @@ function listEvents(){
 
 function event(){
 
-	$eventsManager = new \OCR\Blog\Model\EventsManager();
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
+	$eventsManager = new EventsManager();
+	$commentsManager= new CommentsManager();
 
 	$req=$eventsManager->getEvent($_GET['id']);
 
 	$comments=$commentsManager->getComments($_GET['id']);
+
+	$verif=$eventsManager->getMemberEventsInscription($_SESSION['id']);
 
 
 
@@ -45,26 +47,69 @@ function event(){
 		throw new Exception('Le billet demandé n\'existe pas');
 	}
 	else {
-		require('view/Frontend/eventView.php');
+		require('App/view/Frontend/eventView.php');
 	}
 
 }
 
 
 
+function eventInscription(){
+
+	$eventsManager= new EventsManager();
+
+	$verif=$eventsManager->getMemberEventsInscription($_SESSION['id']);
+
+	if ($verif->rowCount()==0){
+
+		$req=$eventsManager->eventInscription($_SESSION['id'], $_GET['id']);
+
+		if($req==false){
+			throw new Exception('Impossible de s\'inscrire à cet évènement');
+		}
+		else {
+			header('Location: index.php?action=event&id='. $_GET['id']);
+		}
+	}
+	else{
+		throw new Exception('Vous êtes déjà inscrit à cet évènement');
+		
+	}
+
+	
+}
+
+
+
+
+function showEventsInscription(){
+
+	$eventsManager= new EventsManager();
+
+	$req=$eventsManager->getMemberEventsInscription($_SESSION['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de d\'afficher les évènements');
+	}
+	else {
+		require('App/view/Frontend/agendaView.php');
+	}
+}
+
+
 // INSCRIPTION & CONNEXION
 
 function register(){
-	require('view/Frontend/registerView.php');
+	require('App/view/Frontend/registerView.php');
 }
 
 
 
 function addMember($registerName, $registerMail, $registerPassword){
 
-	$registerManager= new \OCR\Blog\Model\RegisterManager();
+	$userManager= new UserManager();
 
-	$verif=$registerManager->verify($registerName, $registerMail);
+	$verif=$userManager->verify($registerName, $registerMail);
 
 	if($verif==false){
 		throw new Exception('Impossible de créer le compte');
@@ -72,7 +117,7 @@ function addMember($registerName, $registerMail, $registerPassword){
 
 	elseif($verif->rowCount()==0){
 
-		$req= $registerManager->register($registerName, $registerMail, password_hash($registerPassword, PASSWORD_DEFAULT));
+		$req= $userManager->register($registerName, $registerMail, password_hash($registerPassword, PASSWORD_DEFAULT));
 
 		if($req==false){
 			throw new Exception('Impossible de créer le compte');
@@ -90,46 +135,17 @@ function addMember($registerName, $registerMail, $registerPassword){
 
 
 function connect(){
-	require('view/Frontend/connectionView.php');
+	require('App/view/Frontend/connectionView.php');
 }
 
 
 
-/*function connection($pseudo, $pass){
-
-	$connectionManager= new \OCR\Blog\Model\ConnectionManager();
-
-	$req=$connectionManager->connect($pseudo, $pass);
-
-	if($req==false){
-		throw new Exception("Impossible de vous connecter");
-	}
-	
-	else{
-		$resultats=$req->fetch();
-
-		if($req->rowCount()==0){
-			throw new Exception('pseudo ou mot de passe incorrect');	
-		}
-		else{
-		
-			session_start();
-			$_SESSION['id']=$resultats['id'];
-			$_SESSION['pseudo']= $pseudo;
-			$_SESSION['type']=$resultats['type'];
-		
-			header ('Location: index.php?action=listEvents');
-		}
-	}
-
-}*/
-
 
 function connection($pseudo, $pass){
 
-	$connectionManager= new \OCR\Blog\Model\ConnectionManager();
+	$userManager= new UserManager();
 
-	$req=$connectionManager->connect($pseudo);
+	$req=$userManager->connect($pseudo);
 
 	$resultat=$req->fetch();
 
@@ -148,7 +164,7 @@ function connection($pseudo, $pass){
 			$_SESSION['pseudo']= $pseudo;
 			$_SESSION['type']=$resultat['type'];
 		
-			header ('Location: index.php?action=listPosts');	
+			header ('Location: index.php?action=listEvents');	
 		}
 		else{
 			throw new Exception("Mot de passe incorrect");
@@ -174,7 +190,7 @@ function disconnect(){
 
 function addComment($author, $comment){
 
-	$commentsManager=new  \OCR\Blog\Model\CommentsManager();
+	$commentsManager= new CommentsManager();
 
 	$req = $commentsManager->postComment($_GET['id'], $author, $comment);
 

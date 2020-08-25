@@ -1,8 +1,13 @@
 <?php
 
-namespace OCR\Blog\Model;
+namespace App\model;
 
-require_once('model/Manager.php');
+require_once('vendor/autoload.php');
+
+use App\model\Manager;
+
+
+
 
 class CommentsManager extends Manager
 {
@@ -11,7 +16,7 @@ class CommentsManager extends Manager
 
 		$db=$this->dbConnect();
 
-		$comments =$db->prepare('SELECT comments.id, comments.id_evts, comments.comment, DATE_FORMAT(comments.comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr, members.name FROM comments INNER JOIN members ON comments.id_members=members.id WHERE id_events=? ORDER BY comment_date');
+		$comments =$db->prepare('SELECT comments.id, comments.id_evts, comments.comment, DATE_FORMAT(comments.comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr, members.name FROM comments INNER JOIN members ON comments.id_members=members.id WHERE id_evts=? ORDER BY comment_date');
 		$comments->execute(array($eventId));
 
 		return $comments;

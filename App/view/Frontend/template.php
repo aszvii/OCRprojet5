@@ -65,7 +65,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 							<li><i class="fas fa-window-close"></i></li>
 							<a href=""><li>Modifier mon profil</li></a>
 							<a href=""><li>Créer un évènement</li></a>
-							<a href=""><li>Mon agenda</li></a>
+							<a href="index.php?action=showEventsInscription"><li>Mon agenda</li></a>
 							<a href=""><li>Administration</li></a>
 						</ul>
 
@@ -75,7 +75,7 @@ else{
 ?>
 
 						<p><a href="index.php?action=register">s'inscrire</a></p>
-						<p><a href="">se connecter</a></p>
+						<p><a href="index.php?action=connect">se connecter</a></p>
 
 <?php
 }
@@ -94,8 +94,7 @@ else{
 							<h2>Il y a toujours quelque chose à faire près de chez vous.</h1>
 							<p>Rejoignez la communauté "on the Corner" et partagez de nombreux évènements avec les autres membres...</p>
 							<div id="sliderButton">
-								<button><a href="">Voir les évènements à venir</a></button>
-								<!--<button><a href="">Trouver un évènement près de chez vous</a></button>-->
+								<button><a href="index.php#cible">Voir les évènements à venir</a></button>
 							</div>
 						</div>
 					</div>

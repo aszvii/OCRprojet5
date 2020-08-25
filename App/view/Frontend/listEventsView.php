@@ -45,7 +45,7 @@
 
 
 
-	<div class="evtsPost">
+	<div class="evtsPost" id="cible">
 		<p id="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?>, le <?= $data['date_evts_fr'] ?></em></p>
 		<h3 id="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= htmlspecialchars($data['evts_title']) ?></a></h3>
 		<p id="postDescript"><?= htmlspecialchars($data['evts_description']) ?></p>

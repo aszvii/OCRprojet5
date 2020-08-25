@@ -11,7 +11,7 @@
 
 			<meta name="description" content="Blog">
 
-			<link rel="stylesheet" href="public/CSS/style.css">
+			<link rel="stylesheet" href="App/public/CSS/style.css">
 
 			<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
 
@@ -47,21 +47,43 @@
 						
 					</div>
 
+
 					<div id="brandMenu">
-						<h1><a href="index.php">On The Corner</a></h2>
+						<h1><a href="index.php">On The Corner</a></h1>
 					</div>
 
+
 					<div id="profilMenu">
-						<a href=""><i class="fas fa-user-circle"></i></a>
+<?php 
+if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
+?>
+
+						<a id="profilMenuLink" href=""><i class="fas fa-user-circle"></i></a>
 
 						<ul id="profilMenuRoll">
-							<a href=""><li><i class="fas fa-window-close"></i></li></a>
+							<li><i class="fas fa-window-close"></i></li>
 							<a href=""><li>Modifier mon profil</li></a>
 							<a href=""><li>Créer un évènement</li></a>
 							<a href=""><li>Mon agenda</li></a>
 							<a href=""><li>Administration</li></a>
 						</ul>
+
 					</div>
+
+<?php
+}
+else{
+?>			
+					<div>
+
+						<p><a href="index.php?action=register">s'inscrire</a></p>
+						<p><a href="index.php?action=connect">se connecter</a></p>
+
+					</div>
+
+<?php
+}
+?>
 
 				</div>
 
