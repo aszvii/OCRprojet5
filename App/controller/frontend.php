@@ -36,8 +36,9 @@ function event(){
 
 	$comments=$commentsManager->getComments($_GET['id']);
 
-	$verif=$eventsManager->getMemberEventsInscription($_SESSION['id']);
-
+	if(isset($_SESSION['id'])){
+		$verif=$eventsManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
+	}
 
 
 	if($req==false || $comments===false){
@@ -53,12 +54,111 @@ function event(){
 }
 
 
+function eventCreation(){
+	require('App/view/Frontend/addEventView.php');
+}
+
+
+function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventType, $eventDescript){
+
+	$eventsManager= new EventsManager();
+
+	$req=$eventsManager->addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventType, $eventDescript);
+
+
+	if($req==false){
+		throw new Exception('Impossible d\'ajouter l\'évènement');
+	}
+	else{
+		header('Location: index.php');
+	}
+}
+
+
+
+function eventModifPage(){
+
+	$eventManager= new EventsManager();
+
+	$req= $eventManager->getEvent($_GET['id']);
+
+
+	if($req==false){
+		throw new Exception('Impossible d\'ouvrir la page');	
+	}
+	elseif($req->rowCount()==0){
+		throw new Exception('L\'évènement que vous souhaitez modifier n\'existe pas');	
+	}
+	else{
+		$resultat=$req->fetch(); 
+
+		if($resultat['id_creator']==$_SESSION['id']){
+			require('App/view/Frontend/modifEventView.php');
+		}
+		else{
+			throw new Exception('Vous ne pouvez pas modifier un évènement que vous n\'avez pas créé');	
+		}
+	}
+
+}
+
+
+
+
+function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript){
+
+	$eventManager= new EventsManager();
+
+	$event= $eventManager->getEvent($_GET['id']);
+
+	if($event==false){
+		throw new Exception('Impossible de trouver l\'évènement à modifier');
+	}
+	else{
+		$resultats=$event->fetch();
+
+		if($resultats['id_creator']==$_SESSION['id']){
+
+			$req= $eventManager->modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript, $_GET['id']);
+
+			if($req==false){
+				throw new Exception('Impossible de modifier le billet');	
+			}
+			else{
+				header('Location: index.php');
+			}
+		}
+		else{
+			throw new Exception('Vous ne pouvez pas modifier un évènement que vous n\'avez pas créé');
+		}
+	}
+
+}
+
+
+
+function deleteEvent(){
+
+	$eventsManager= new EventsManager();
+
+	$req=$eventsManager->deleteEvent($_GET['id']);
+
+
+	if($req==false){
+		throw new Exception('Impossible de supprimer l\'évènement');
+	}
+	else{
+		showEventsInscription();
+	}
+}
+
+
 
 function eventInscription(){
 
 	$eventsManager= new EventsManager();
 
-	$verif=$eventsManager->getMemberEventsInscription($_SESSION['id']);
+	$verif=$eventsManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
 
 	if ($verif->rowCount()==0){
 
@@ -72,11 +172,24 @@ function eventInscription(){
 		}
 	}
 	else{
-		throw new Exception('Vous êtes déjà inscrit à cet évènement');
-		
+		throw new Exception('Vous êtes déjà inscrit à cet évènement');	
 	}
+}
 
-	
+
+
+function deleteInscription(){
+
+	$eventsManager= new EventsManager();
+
+	$req=$eventsManager->deleteInscription($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de vous désinscrire');
+	}
+	else {
+		header('Location: index.php?action=event&id='. $_GET['event']);
+	}
 }
 
 
@@ -88,13 +201,16 @@ function showEventsInscription(){
 
 	$req=$eventsManager->getMemberEventsInscription($_SESSION['id']);
 
-	if($req==false){
+	$req2=$eventsManager->getCreateEvents($_SESSION['id']);
+
+	if($req==false || $req2==false){
 		throw new Exception('Impossible de d\'afficher les évènements');
 	}
 	else {
 		require('App/view/Frontend/agendaView.php');
 	}
 }
+
 
 
 // INSCRIPTION & CONNEXION

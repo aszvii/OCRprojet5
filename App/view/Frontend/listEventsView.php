@@ -5,7 +5,6 @@
 <?php ob_start(); ?>
 
 
-<?php while ($data=$req->fetch()): ?>
 
 <section id="postSection">
 
@@ -43,21 +42,23 @@
 
 	</div>
 
-
+<?php while ($data=$req->fetch()): ?>
 
 	<div class="evtsPost" id="cible">
-		<p id="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?>, le <?= $data['date_evts_fr'] ?></em></p>
-		<h3 id="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= htmlspecialchars($data['evts_title']) ?></a></h3>
-		<p id="postDescript"><?= htmlspecialchars($data['evts_description']) ?></p>
-		<p id="seeEvtsLinkPost"><a href="index.php?action=event&id=<?=$data['id']?>">Voir l'évènement</a></p>
+		<p class="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?>, le <?= $data['date_evts_fr'] ?></em></p>
+		<h3 class="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= $data['evts_title'] ?></a></h3>
+		<div class="postDescript"><?= $data['evts_description'] ?></div>
+		<p class="seeEvtsLinkPost"><a href="index.php?action=event&id=<?=$data['id']?>">Voir l'évènement</a></p>
 	</div>
 
 
-<?php $req->closeCursor(); ?> 
-
 <?php endwhile; ?>
 
+<?php $req->closeCursor(); ?> 
+
+
 </section>
+
 
 <?php $content= ob_get_clean(); ?>
 

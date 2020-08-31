@@ -13,7 +13,7 @@ header{
 
 footer{
 	height: 90px;
-    border-top: 1px solid black;
+    border-top: 5px solid black;
 }
 
 
@@ -105,6 +105,13 @@ footer{
 #profilMenu p a:hover{
 	color: white;
 }
+
+
+#brandMenu{
+	width: 100%;
+	text-align: center;
+}
+
 
 #brandMenu a{
 	text-decoration: none;
@@ -226,7 +233,7 @@ footer{
 	color: orange;
 }
 
-#evtsPlaceDate{
+.evtsPlaceDate{
 	font-size: 20px;
 	font-style: italic;
 	text-align: center;
@@ -239,7 +246,7 @@ footer{
 	padding-bottom: 15px;
 }
 
-#evtsPostTitle{
+.evtsPostTitle{
 	text-align: center;
 	font-size: 35px;
 	margin-top: 0px;
@@ -256,7 +263,7 @@ footer{
 }
 
 
-#postDescript{
+.postDescript{
 	margin-top: 0px;
 	margin-bottom: 0px;
 	padding-top: 10px;
@@ -268,26 +275,6 @@ footer{
 	border: 4px solid black;
 }
 
-#seeEvtsLinkPost{
-	font-size: 18px;
-	font-weight: bold;
-	background-color: orange;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	text-align: center;
-	padding-right: 10px;
-	padding-left: 10px;
-	padding-top: 10px;
-}
-
-#seeEvtsLinkPost a{
-	color: black;
-}
-
-#seeEvtsLinkPost a:hover{
-	color: white;
-}
-
 
 
 #postSectionFormDiv{
@@ -297,29 +284,78 @@ footer{
 }
 
 
-/* POSTVIEW */
+/* EVENTVIEW */
 
 
 #inscriptionButton{
 	margin-top: 50px;
 	border: 2px solid black;
-	padding: 10px;
+	box-shadow: 2px 2px 2px black;
 	background-color: RGB(221, 221, 221);
 }
 
 
 
-#inscriptionButton a{
+#inscriptionLink{
 	text-decoration: none;
 	padding: 10px;
 	color: green;
 	font-weight: bold;
 }
 
-#inscriptionButton a:hover{
-	background-color: black;
+#deleteInscriptionLink{
+	text-decoration: none;
+	padding: 10px;
+	color: red;
+	font-weight: bold;
+}
+
+#deleteInscriptionLink:hover, #inscriptionLink:hover{
 	color: white;
 }
+
+
+.eventPost{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 70%;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin-top: 25px;
+	padding-bottom: 30px;
+}
+
+.eventPost h3{
+	font-size: 35px;
+	text-align: center;
+	text-decoration: underline;
+	color: orange;
+}
+
+.eventPostContent{
+	width: 100%;
+	padding: 10px;
+	background-color: RGBa(221, 221, 221, 0.3);
+}
+
+
+.eventPostContent p{
+	font-size: 24px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.eventPostContent em{
+	font-size: 20px;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+#descriptEventPost{
+	text-decoration: underline;
+}
+
 
 #eventCommentDiv{
 	width: 70%;
@@ -342,7 +378,12 @@ footer{
 #connectToComment{
 	margin-top: 60px;
 	font-style: italic;
+	font-weight: bold;
 	text-align: center;
+}
+
+#connectToComment a:hover{
+	color: orange;
 }
 
 
@@ -449,6 +490,164 @@ footer{
 }
 
 
+#goToInscript a{
+	color: white;
+	background-color: blue;
+	font-size: 20px;
+}
+
+#goToInscript a:hover{
+	color: blue;
+	background-color: white;
+}
 
 
+/* AGENDA VIEW */
+
+#selectView{
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+}
+
+#organised{
+	text-decoration: underline;
+	width: 50%;
+	text-align: center;
+	box-shadow: inset -2px -2px 5px black;
+}
+
+#participate{
+	text-decoration: underline;
+	width: 50%;
+	text-align: center;
+}
+
+
+#participateSection{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 25px;
+	margin-bottom: 100px;
+}
+
+
+#organisedSection{
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 25px;
+	margin-bottom: 100px;
+}
+
+.seeEvtsLinkPost{
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+.seeEvtsLinkPost2{
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.seeEvtsLinkPost a{
+	color: black;
+}
+
+.seeEvtsLinkPost a:hover{
+	color: white;
+}
+
+
+#seeEventLink{
+	color: blue;
+	font-weight: normal;
+}
+
+#modifyEventLink{
+	color: green;
+	font-weight: normal;
+}
+
+#deleteEventLink{
+	color: red;
+	font-weight: normal;
+}
+
+
+#seeEventLink:hover, #modifyEventLink:hover, #deleteEventLink:hover{
+	color: white;
+}
+
+/*ADD EVENT VIEW*/
+
+#addModifEventDiv{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 60px;
+}
+
+
+#addModifEventDiv h1{
+	color: orange;
+	font-size: 35px;
+	text-decoration: underline;
+	margin-bottom: 60px;
+}
+
+
+#addModifEventDiv form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#formDivTitle{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 45px;
+}
+
+#addModifEventDiv form label{
+	font-weight: bold;
+}
+
+
+.formDiv{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 35px;
+}
+
+
+.formDiv input{
+	width: 70%;
+}
+
+
+#formDescription{
+	margin-bottom: 35px;
+}
 

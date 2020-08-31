@@ -16,13 +16,14 @@
     <div id="inscriptionButton">
 
 <?php if($verif->rowCount()==0){ ?>
-        <p><a href="index.php?action=eventInscription&id=<?= $data['id'] ?>">Je serais présent à cet évènement</a></p>
+        <p><a id="inscriptionLink" href="index.php?action=eventInscription&id=<?= $data['id'] ?>">Je souhaites participer à cet évènement</a></p>
 <?php }
-      else{ ?>
+      else{ $inscript=$verif->fetch() ?>
 
-        <p>Vous participez à cet évènement</p>   <!--Mettre bouton pour se désinscrire-->
+        <p><a id="deleteInscriptionLink" href="index.php?action=deleteInscription&id=<?=$inscript['id']?>&event=<?=$data['id']?>">Je ne veux plus y participer</a></p>   <!--Mettre bouton pour se désinscrire-->
 <?php
       }
+      $verif->closeCursor();
 ?>
 
     </div>
@@ -30,12 +31,19 @@
 <?php endif; ?>
 
 
-	<div class="evtsPost">
-		<p id="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?>, le <?= $data['date_evts_fr'] ?></em></p>
-		<h3 id="evtsPostTitle"><?= htmlspecialchars($data['evts_title']) ?></h3>
-		<p id="postDescript"><?= htmlspecialchars($data['evts_description']) ?></p>
-		<p id="seeEvtsLinkPost"><a href=""></a></p>
-	</div>
+	<div class="eventPost">
+        <h3><?= $data['evts_title'] ?></h3>
+
+        <div class="eventPostContent">
+            <p>Lieu: <em><?= htmlspecialchars($data['evts_place']) ?></em></p>
+            <p>Date et Heure: <em>le <?= $data['date_evts_fr'] ?></em></p>
+             <p>type d'évènement: <em><?= $data['evts_type'] ?></em></p>
+            <p>Organisé par: <em><?= $data['name'] ?></em></p><br/>
+            <p id="descriptEventPost">Description:</p><p><em><?= $data['evts_description']?></em></p>
+		
+		  <p id="eventPostLink"><a href=""></a></p>
+	   </div>
+    </div>
 
 
 <?php $req->closeCursor(); ?> 
@@ -99,7 +107,7 @@
         }
     ?>
 
-            	           <p id="<?=$comment['comment']?>"><?php echo htmlspecialchars($comment['comment']); ?></p></p>
+            	           <p id="<?=$comment['comment']?>"><?php echo $comment['comment']; ?></p></p>
 
                         </div>
 
@@ -117,7 +125,7 @@
 
 <?php if (!isset($_SESSION['id'])): ?>
 
-    <p id="connectToComment">Connectez vous pour commenter</p>
+    <p id="connectToComment"><a href="index.php?action=connect">Connectez vous pour commenter</a></p>
 
 <?php endif; ?>
 

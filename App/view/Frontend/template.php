@@ -18,8 +18,6 @@
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
 
 
-			<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
 
 
 			<title><?= $title ?></title>
@@ -33,7 +31,7 @@
 
 				<div id="fixedMenu">
 
-					<div id="listMenu">
+					<!--<div id="listMenu">
 						<a id="menuBar" href=""><i class="fas fa-bars"></i></a>
 
 						
@@ -45,7 +43,7 @@
 							<a href=""><li>Recherche</li></a>
 						</ul>
 						
-					</div>
+					</div>-->
 
 					<div id="brandMenu">
 						<h1><a href="index.php">On The Corner</a></h2>
@@ -64,7 +62,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 						<ul id="profilMenuRoll">
 							<li><i class="fas fa-window-close"></i></li>
 							<a href=""><li>Modifier mon profil</li></a>
-							<a href=""><li>Créer un évènement</li></a>
+							<a href="index.php?action=eventCreation"><li>Créer un évènement</li></a>
 							<a href="index.php?action=showEventsInscription"><li>Mon agenda</li></a>
 							<a href=""><li>Administration</li></a>
 						</ul>

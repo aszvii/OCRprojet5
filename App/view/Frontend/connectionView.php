@@ -27,8 +27,8 @@
 				</form>
 			</div>
 
+			 <p id="goToInscript"><a href="index.php?action=register">Pas encore de compte?</a></p>
 		</div>
-	</div>
 
 </section>
 
