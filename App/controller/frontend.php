@@ -78,7 +78,7 @@ function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventTyp
 
 function eventModifPage(){
 
-	$eventManager= new EventsManager();
+	$eventsManager= new EventsManager();
 
 	$req= $eventManager->getEvent($_GET['id']);
 
@@ -107,7 +107,7 @@ function eventModifPage(){
 
 function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript){
 
-	$eventManager= new EventsManager();
+	$eventsManager= new EventsManager();
 
 	$event= $eventManager->getEvent($_GET['id']);
 
@@ -141,6 +141,8 @@ function deleteEvent(){
 
 	$eventsManager= new EventsManager();
 
+	$event= $eventsManager->getEvent($_GET['id']);
+
 	$req=$eventsManager->deleteEvent($_GET['id']);
 
 
@@ -148,7 +150,32 @@ function deleteEvent(){
 		throw new Exception('Impossible de supprimer l\'évènement');
 	}
 	else{
-		showEventsInscription();
+		$resultats=$event->fetch();
+
+		if($resultats['id_creator']==$_SESSION['id']){
+			showEventsInscription();
+		}
+		else{
+			throw new Exception('Vous n\'avez pas le droit de supprimer cet évènement');
+			
+		}	
+	}
+}
+
+
+
+
+function signalEvent(){
+
+	$eventsManager= new EventsManager();
+
+	$req= $eventsManager->signalEvent($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de signaler le commentaire');
+	}
+	else{
+		header('Location: index.php?action=event&id='.$_GET['id']);
 	}
 }
 
@@ -322,7 +349,7 @@ function addComment($author, $comment){
 
 function signalCom(){
 
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
+	$commentsManager= new CommentsManager();
 
 	$req= $commentsManager->signalComment($_GET['id']);
 
@@ -330,7 +357,7 @@ function signalCom(){
 		throw new Exception('Impossible de signaler le commentaire');
 	}
 	else{
-		header('Location: index.php?action=event&id='.$_GET['post']);
+		header('Location: index.php?action=event&id='.$_GET['event']);
 	}
 }
 

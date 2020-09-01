@@ -43,10 +43,19 @@
 		
 		  <p id="eventPostLink"><a href=""></a></p>
 	   </div>
+
+       <?php 
+        if(isset($_SESSION['id'])){
+    ?>
+            <p><a id="signalLink" href="index.php?action=signalEvent&id=<?=$data['id']?>">(signaler cet évènement)</a></p>
+    <?php
+        }
+    ?>
+
     </div>
 
 
-<?php $req->closeCursor(); ?> 
+
 
 
 
@@ -93,7 +102,7 @@
     <?php 
         if(isset($_SESSION['id'])){
     ?>
-                            <a id="signalLink" href="index.php?action=signalComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(signaler)</a>
+                            <a id="signalLink" href="index.php?action=signalComment&id=<?=$comment['id']?>&event=<?=$data['id']?>">(signaler)</a>
     <?php
         }
     ?>
@@ -117,6 +126,8 @@
 
         	}
         }
+
+        $req->closeCursor(); 
 
         $comments->closeCursor();
 

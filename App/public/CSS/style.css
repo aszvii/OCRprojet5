@@ -387,6 +387,9 @@ footer{
 }
 
 
+.eventPost a:hover, #eventCommentDiv a:hover{
+	color: #5F1155;
+}
 
 /* REGISTERVIEW 1 CONNECTIONVIEW */
 
@@ -595,6 +598,10 @@ footer{
 #seeEventLink:hover, #modifyEventLink:hover, #deleteEventLink:hover{
 	color: white;
 }
+
+
+
+
 
 /*ADD EVENT VIEW*/
 

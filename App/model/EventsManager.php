@@ -74,6 +74,35 @@ class EventsManager extends Manager
 
 
 
+	public function signalEvent($eventId){
+
+		$db=$this->dbConnect();
+
+		
+		$req= $db->prepare('UPDATE events SET signalement=1 WHERE id=?');
+
+		$req->execute(array($eventId));
+
+		return $req;
+
+	}
+
+
+
+	public function cancelSignal($commentId){
+
+		$db=$this->dbConnect();
+
+		
+		$req= $db->prepare('UPDATE events SET signalment=0 WHERE id=?');
+
+		$req->execute(array($eventId));
+
+		return $req;
+	}
+
+
+
 	public function eventInscription($pseudo, $eventId){
 
 		$db=$this->dbConnect();

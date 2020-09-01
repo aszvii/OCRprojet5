@@ -112,6 +112,12 @@ try{
 
 
 
+		elseif($_GET['action']=="signalEvent"){
+			signalEvent();
+		}
+
+
+
 		elseif ($_GET['action']=="eventInscription"){
 			if(isset($_SESSION['id'])){
 				if(isset($_GET['id'])){
@@ -162,6 +168,12 @@ try{
 				throw new Exception('Connectez vous pour commenter');
 				
 			}
+		}
+
+
+
+		elseif($_GET['action']=="signalComment"){
+			signalCom();
 		}
 
 
