@@ -14,7 +14,7 @@
 	    </div>
 
 	    <div class="formDiv">
-			<label for="dateHour">Date et Heure:</label><input type="datetime-local" id="dateHour" name="dateHour" value="<?=$resultat['evts_date']?>">
+			<label for="dateHour">Date et Heure:</label><input type="datetime-local" id="dateHour" name="dateHour" value="2018-06-12T19:30">
 	    </div>
 
 	    <div class="formDiv">

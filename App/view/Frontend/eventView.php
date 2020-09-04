@@ -1,4 +1,4 @@
-<?php $data=$req->fetch() ?>
+<?php $data=$req->fetch(); ?>
 
 
 <?php $title= $data['evts_title']; ?>
@@ -37,7 +37,7 @@
         <div class="eventPostContent">
             <p>Lieu: <em><?= htmlspecialchars($data['evts_place']) ?></em></p>
             <p>Date et Heure: <em>le <?= $data['date_evts_fr'] ?></em></p>
-             <p>type d'évènement: <em><?= $data['evts_type'] ?></em></p>
+             <p>type d'évènement: <em><?= $data['type_name'] ?></em></p>
             <p>Organisé par: <em><?= $data['name'] ?></em></p><br/>
             <p id="descriptEventPost">Description:</p><p><em><?= $data['evts_description']?></em></p>
 		

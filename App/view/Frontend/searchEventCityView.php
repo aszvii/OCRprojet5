@@ -8,7 +8,13 @@
 
 <section id="postSection">
 
-	<h2>Évènements à venir...</h2>
+<?php $eventsType=$type->fetch(); ?>
+
+	<h2>Évènements "<?= htmlspecialchars($eventsType['type_name'])?>" à venir...</h2>
+
+<?php $type->closeCursor(); ?>
+
+
 
 
 	<div id="postSectionFormDiv">
@@ -16,17 +22,17 @@
 
 		<form id="searchTypeForm" action="index.php?action=searchType" method="post">
 
-			<label for="searchEventType">Rechercher par type d'évènement:</label>
+			<label for="searchType">Rechercher par type d'évènement:</label>
 
 				<select name="searchEventType" id="searchEventType">
 					<option value="">--Choisissez un type d'évènement--</option>
-					<option value="1">Sport</option>
-   					<option value="2">Musique</option>
-    				<option value="3">Culture</option>
-    				<option value="4">Gastronomie</option>
-   	 				<option value="5">Art</option>
-    				<option value="6">Commerce</option>
-    				<option value="7">Autre</option>
+					<option value="sport">Sport</option>
+   					<option value="musique">Musique</option>
+    				<option value="culture">Culture</option>
+    				<option value="gastronomie">Gastronomie</option>
+   	 				<option value="art">Art</option>
+    				<option value="commerce">Commerce</option>
+    				<option value="autre">Autre</option>
 				</select>
 
 			<input type="submit" value="Rechercher">
@@ -46,6 +52,7 @@
 
 	</div>
 
+
 <?php while ($data=$req->fetch()): ?>
 
 	<div class="evtsPost" id="cible">
@@ -54,6 +61,10 @@
 		<div class="postDescript"><?= $data['evts_description'] ?></div>
 		<p class="seeEvtsLinkPost"><a href="index.php?action=event&id=<?=$data['id']?>">Voir l'évènement</a></p>
 	</div>
+
+	
+
+
 
 
 <?php endwhile; ?>

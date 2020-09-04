@@ -31,20 +31,6 @@
 
 				<div id="fixedMenu">
 
-					<!--<div id="listMenu">
-						<a id="menuBar" href=""><i class="fas fa-bars"></i></a>
-
-						
-						<ul id="listMenuRoll">
-							<li><i class="fas fa-window-close"></i></li>
-							<a href=""><li>Accueil</li></a>
-							<a href=""><li>Évènements</li></a>
-							<a href=""><li>Membres</li></a>
-							<a href=""><li>Recherche</li></a>
-						</ul>
-						
-					</div>-->
-
 					<div id="brandMenu">
 						<h1><a href="index.php">On The Corner</a></h2>
 					</div>
@@ -60,11 +46,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 						<a id="profilMenuLink" href=""><i class="fas fa-user-circle"></i></a>
 
 						<ul id="profilMenuRoll">
-							<li><i class="fas fa-window-close"></i></li>
-							<a href=""><li>Modifier mon profil</li></a>
-							<a href="index.php?action=eventCreation"><li>Créer un évènement</li></a>
-							<a href="index.php?action=showEventsInscription"><li>Mon agenda</li></a>
-							<a href=""><li>Administration</li></a>
+							<li><i id="closeMenu" class="fas fa-window-close"></i></li>
+							<li><a href="">Modifier mon profil</a></li>
+							<li><a href="index.php?action=eventCreation">Créer un évènement</a></li>
+							<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
+							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
+							<li><a href="index.php?action=admin">Administration</a></li>
 						</ul>
 
 <?php
@@ -92,7 +79,7 @@ else{
 							<h2>Il y a toujours quelque chose à faire près de chez vous.</h1>
 							<p>Rejoignez la communauté "on the Corner" et partagez de nombreux évènements avec les autres membres...</p>
 							<div id="sliderButton">
-								<button><a href="index.php#cible">Voir les évènements à venir</a></button>
+								<button><a href="#cible">Voir les évènements à venir</a></button>
 							</div>
 						</div>
 					</div>
@@ -111,7 +98,10 @@ else{
 			</footer>
 
 
-			
+		<?php if(isset($_SESSION['id'])){ ?>
+			<script src="App/javascript/p5.js"></script>
+		<?php } ?>
+		
 		</body>
 		
 	</html>

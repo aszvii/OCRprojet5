@@ -31,6 +31,28 @@ try{
 
 
 
+		elseif($_GET['action']=="searchType"){
+			if(!empty($_POST['searchEventType'])){
+				searchEventPerType($_POST['searchEventType']);
+			}
+			else{
+				throw new Exception('Veuillez sélectionner un type d\'évènement à rechercher');
+			}
+		}
+
+
+
+		elseif($_GET['action']=="searchCity"){
+			if(!empty($_POST['searchEventCity'])){
+				searchEventPerCity(strtolower($_POST['searchEventCity']));
+			}
+			else{
+				throw new Exception('Veuillez sélectionner un lieu');
+			}
+		}
+
+
+
 		elseif($_GET['action']=="eventCreation"){
 			if(isset($_SESSION['id'])){
 				eventCreation();
@@ -116,6 +138,11 @@ try{
 			signalEvent();
 		}
 
+
+
+		elseif($_GET['action']=="showSignalEvent"){
+			getSignalEvent();
+		}
 
 
 		elseif ($_GET['action']=="eventInscription"){
@@ -218,6 +245,11 @@ try{
 		}
 
 
+		elseif($_GET['action']=="disconnect"){
+			disconnect();
+		}
+
+
 		elseif($_GET['action']=="showEventsInscription"){
 			if(isset($_SESSION['id'])){
 				showEventsInscription();
@@ -225,6 +257,18 @@ try{
 			else{
 				throw new Exception('Vous n\'avez pas le droit d\'accéder à cette page');
 			}
+		}
+
+
+
+		elseif($_GET['action']=='admin'){
+			admin();
+		}
+
+
+
+		elseif($_GET['action']=="passedEvents"){
+			listPassedEvents();
 		}
 	}
 

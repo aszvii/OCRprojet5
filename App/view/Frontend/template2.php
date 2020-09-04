@@ -39,20 +39,6 @@
 
 				<div id="fixedMenu">
 
-					<!--<div id="listMenu">
-						<a id="menuBar" href=""><i class="fas fa-bars"></i></a>
-
-						
-						<ul id="listMenuRoll">
-							<a href=""><li><i class="fas fa-window-close"></i></li></a>
-							<a href=""><li>Accueil</li></a>
-							<a href=""><li>Évènements</li></a>
-							<a href=""><li>Membres</li></a>
-							<a href=""><li>Recherche</li></a>
-						</ul>
-						
-					</div>-->
-
 
 					<div id="brandMenu">
 						<h1><a href="index.php">On The Corner</a></h1>
@@ -67,11 +53,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 						<a id="profilMenuLink" href=""><i class="fas fa-user-circle"></i></a>
 
 						<ul id="profilMenuRoll">
-							<li><i class="fas fa-window-close"></i></li>
+							<li><i id="closeMenu" class="fas fa-window-close"></i></li>
 							<a href=""><li>Modifier mon profil</li></a>
 							<a href="index.php?action=eventCreation"><li>Créer un évènement</li></a>
 							<a href="index.php?action=showEventsInscription"><li>Mon agenda</li></a>
-							<a href=""><li>Administration</li></a>
+							<a href="index.php?action=admin"><li>Administration</li></a>
 						</ul>
 
 					</div>
@@ -104,6 +90,13 @@ else{
 			
 			<footer>
 			</footer>
+
+
+
+		<?php if(isset($_SESSION['id'])){ ?>
+			<script src="App/javascript/p5.js"></script>
+		<?php } ?>
+		
 
 		</body>
 		

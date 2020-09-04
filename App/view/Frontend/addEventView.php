@@ -24,6 +24,7 @@
 	    <div class="formDiv">
 			<label for="type">Type d'évènement:</label>
 			<select name="type" id="type">
+				<option value="">--Choisissez un type d'évènement--</option>
     			<option value="sport">Sport</option>
    				<option value="musique">Musique</option>
     			<option value="culture">Culture</option>

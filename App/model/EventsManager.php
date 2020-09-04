@@ -16,7 +16,7 @@ class EventsManager extends Manager
 		
 		$db=$this->dbConnect();
 
-		$req = $db->query('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events ORDER BY evts_date ');
+		$req = $db->query('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE evts_date > NOW() ORDER BY evts_date ');
 
 		return $req;
 	}
@@ -29,10 +29,58 @@ class EventsManager extends Manager
 
 		/*$req = $db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE id=?');*/
 
-		$req = $db->prepare('SELECT events.id, events.id_creator, events.evts_title, DATE_FORMAT(events.evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, events.evts_place, events.evts_type, events.evts_description, members.name FROM events INNER JOIN members ON events.id_creator=members.id WHERE events.id=?');
+		$req = $db->prepare('SELECT events.id, events.id_creator, events.evts_title, DATE_FORMAT(events.evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, events.evts_place, events.evts_type, events.evts_description, members.name, events_type.type_name FROM events INNER JOIN members ON events.id_creator=members.id INNER JOIN events_type ON events.evts_type=events_type.id WHERE events.id=?');
 		$req->execute(array($eventId));
 
 		return $req;      
+	}
+
+
+
+	public function getEventPerType($eventType){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE evts_type=? && evts_date>NOW() ORDER BY evts_date');
+		$req->execute(array($eventType));
+
+		return $req;
+	}
+
+
+
+	public function getType($eventType){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('SELECT type_name FROM events_type WHERE id=?');
+		$req->execute(array($eventType));
+
+		return $req;
+	}
+
+
+
+
+	public function getEventPerCity($eventPlace){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE evts_place LIKE ? && evts_date>NOW() ORDER BY evts_date');
+		
+		$req->execute(array('%$eventPlace%'));
+
+	}
+
+
+
+	public function getPassedEvents(){
+
+		$db=$this->dbConnect();
+
+		$req = $db->query('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE evts_date < NOW() ORDER BY evts_date ');
+
+		return $req;
 	}
 
 
@@ -86,6 +134,19 @@ class EventsManager extends Manager
 		return $req;
 
 	}
+
+
+
+	public function getSignalEvent(){
+
+		$db=$this->dbConnect();
+
+
+		$req=$db->query('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE signalement=1');
+
+		return $req;
+	}
+
 
 
 

@@ -54,6 +54,56 @@ function event(){
 }
 
 
+
+function searchEventPerType($eventType){
+
+	$eventsManager= new EventsManager();
+
+	$req= $eventsManager->getEventPerType($eventType);
+
+	$type=$eventsManager->getType($eventType);
+
+
+	if($req==false  || $type==false){
+		throw new Exception('Impossible d\'afficher les évènements');
+	}
+	else{
+			if($req->rowCount()==0){
+				throw new Exception('Aucun évènement de ce type n\'a été trouvé');
+			}
+			else{
+				require('App/view/Frontend/searchTypeEventView.php');
+			}
+	}
+
+}
+
+
+
+function searchEventPerCity($eventPlace){
+
+	$eventsManager= new EventsManager();
+
+	$req= $eventsManager->getEventPerCity($eventPlace);
+
+
+
+	if($req==false){
+		throw new Exception('Impossible d\'afficher les évènements');
+	}
+	else{
+			if($req->rowCount()==0){
+				throw new Exception('Aucun évènement n\'est organisé à cet endroit');
+			}
+			else{
+				require('App/view/Frontend/searchCityEventView.php');
+			}
+	}
+
+}
+
+
+
 function eventCreation(){
 	require('App/view/Frontend/addEventView.php');
 }
@@ -80,7 +130,7 @@ function eventModifPage(){
 
 	$eventsManager= new EventsManager();
 
-	$req= $eventManager->getEvent($_GET['id']);
+	$req= $eventsManager->getEvent($_GET['id']);
 
 
 	if($req==false){
@@ -109,7 +159,7 @@ function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType
 
 	$eventsManager= new EventsManager();
 
-	$event= $eventManager->getEvent($_GET['id']);
+	$event= $eventsManager->getEvent($_GET['id']);
 
 	if($event==false){
 		throw new Exception('Impossible de trouver l\'évènement à modifier');
@@ -119,7 +169,7 @@ function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType
 
 		if($resultats['id_creator']==$_SESSION['id']){
 
-			$req= $eventManager->modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript, $_GET['id']);
+			$req= $eventsManager->modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript, $_GET['id']);
 
 			if($req==false){
 				throw new Exception('Impossible de modifier le billet');	
@@ -176,6 +226,22 @@ function signalEvent(){
 	}
 	else{
 		header('Location: index.php?action=event&id='.$_GET['id']);
+	}
+}
+
+
+
+function getSignalEvent(){
+
+	$eventsManager= new EventsManager();
+
+	$req=$eventsManager->getSignalEvent();
+
+	if($req==false){
+		throw new Exception('Impossible d\'afficher les évènements');
+	}
+	else{
+		require('App/view//Frontend/signalEventView.php');
 	}
 }
 
@@ -404,5 +470,29 @@ function deleteCom(){
 	}
 	else{
 		header('Location: index.php?action=post&id='. $_GET['post']);
+	}
+}
+
+
+
+function admin(){
+	require('App/view/Frontend/adminView.php');
+}
+
+
+
+function listPassedEvents(){
+
+	$eventsManager = new EventsManager();   
+
+	$req=$eventsManager->getPassedEvents();
+
+
+	if($req ==false){
+		echo 'Impossible d\'afficher les évènements';
+	}
+	else{
+
+		require('App/view/Frontend/passedEventsView.php');
 	}
 }
