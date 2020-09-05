@@ -8,11 +8,8 @@
 
 <section id="postSection">
 
-<?php $eventsType=$type->fetch(); ?>
 
-	<h2>Évènements "<?= htmlspecialchars($eventsType['type_name'])?>" à venir...</h2>
-
-<?php $type->closeCursor(); ?>
+	<h2>Évènements à venir à proximité de "<?=$eventPlace?>"...</h2>
 
 
 
@@ -42,7 +39,7 @@
 
 		<form id="searchCityForm" action="index.php?action=searchCity" method="post">
 
-			<label for="searchEventCity">Rechercher par ville:</label>
+			<label for="searchEventCity">Rechercher par lieu:</label>
 
 			<input type="text" name="searchEventCity" id="searchEventCity">
 	

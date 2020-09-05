@@ -98,6 +98,8 @@ function searchEventPerCity($eventPlace){
 			else{
 				require('App/view/Frontend/searchCityEventView.php');
 			}
+
+			
 	}
 
 }

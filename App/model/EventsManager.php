@@ -66,10 +66,11 @@ class EventsManager extends Manager
 
 		$db=$this->dbConnect();
 
-		$req=$db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE evts_place LIKE ? && evts_date>NOW() ORDER BY evts_date');
+		$req=$db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE evts_date>NOW() && evts_place LIKE ? ORDER BY evts_date');
 		
-		$req->execute(array('%$eventPlace%'));
+		$req->execute(array('%'.$eventPlace.'%'));
 
+		return $req;
 	}
 
 

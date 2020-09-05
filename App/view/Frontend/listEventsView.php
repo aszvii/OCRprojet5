@@ -36,7 +36,7 @@
 
 		<form id="searchCityForm" action="index.php?action=searchCity" method="post">
 
-			<label for="searchEventCity">Rechercher par ville:</label>
+			<label for="searchEventCity">Rechercher par lieu:</label>
 
 			<input type="text" name="searchEventCity" id="searchEventCity">
 	
