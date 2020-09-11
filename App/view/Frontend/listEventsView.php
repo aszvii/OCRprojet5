@@ -8,6 +8,7 @@
 
 <section id="postSection">
 
+
 	<h2>Évènements à venir...</h2>
 
 
@@ -49,7 +50,7 @@
 <?php while ($data=$req->fetch()): ?>
 
 	<div class="evtsPost" id="cible">
-		<p class="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?>, le <?= $data['date_evts_fr'] ?></em></p>
+		<p class="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?> (<?=$data['evts_city']?>), le <?= $data['date_evts_fr'] ?></em></p>
 		<h3 class="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= $data['evts_title'] ?></a></h3>
 		<div class="postDescript"><?= $data['evts_description'] ?></div>
 		<p class="seeEvtsLinkPost"><a href="index.php?action=event&id=<?=$data['id']?>">Voir l'évènement</a></p>
@@ -59,6 +60,27 @@
 <?php endwhile; ?>
 
 <?php $req->closeCursor(); ?> 
+
+
+
+<!--<nav>
+	<ul class="pagination">
+
+        <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>" >
+            <a href="index.php?action=listEvents&page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
+        </li>
+        <?php for($page = 1; $page <= $pages; $page++): ?>
+           COMMENTAIRE Lien vers chacune des pages (activé si on se trouve sur la page correspondante) 
+            <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+                <a href="index.php?action=listEvents&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+            </li>
+        <?php endfor ?>
+            COMMENTAIRELien vers la page suivante (désactivé si on se trouve sur la dernière page) 
+            <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+            <a href="index.php?action=listEvents&page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
+        </li>
+    </ul>
+</nav> -->
 
 
 </section>

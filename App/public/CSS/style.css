@@ -295,6 +295,23 @@ footer{
 }
 
 
+#postSection nav{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+
+.pagination{
+	width: 50%;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+	margin: 0;
+	padding: 0;
+}
+
+
 /* EVENTVIEW */
 
 
@@ -401,6 +418,19 @@ footer{
 .eventPost a:hover, #eventCommentDiv a:hover{
 	color: #5F1155;
 }
+
+
+
+#imgEvent{
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+#imgEvent img{
+	width: 100%;
+}
+
+
 
 /* REGISTERVIEW 1 CONNECTIONVIEW */
 
@@ -669,9 +699,20 @@ footer{
 
 
 #formDescription{
+	width: 100%;
 	margin-bottom: 35px;
 }
 
+#description{
+	width: 100%;
+}
+
+
+
+#picEvent em{
+	font-weight: normal;
+	font-style: italic;
+}
 
 
 

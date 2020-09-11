@@ -58,6 +58,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 							<a href="index.php?action=eventCreation"><li>Créer un évènement</li></a>
 							<a href="index.php?action=showEventsInscription"><li>Mon agenda</li></a>
 							<a href="index.php?action=admin"><li>Administration</li></a>
+							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
 						</ul>
 
 					</div>

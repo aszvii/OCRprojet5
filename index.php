@@ -66,8 +66,8 @@ try{
 
 		elseif($_GET['action']=="addEvent"){
 			if(isset($_SESSION['id'])){
-				if(!empty($_POST['title']) && !empty($_POST['dateHour']) && !empty($_POST['place']) && !empty($_POST['type']) && !empty($_POST['description'])){
-					addEvent($_SESSION['id'], htmlspecialchars($_POST['title']), $_POST['dateHour'], $_POST['place'], $_POST['type'], $_POST['description']);
+				if(!empty($_POST['title']) && !empty($_POST['dateHour']) && !empty($_POST['place']) && !empty($_POST['city']) && !empty($_POST['type']) && !empty($_POST['description'])){
+					addEvent($_SESSION['id'], htmlspecialchars($_POST['title']), $_POST['dateHour'], $_POST['place'], $_POST['city'], $_POST['type'], $_POST['description']);
 				}
 				else{
 					throw new Exception('Veuillez remplir tous les champs');
@@ -77,6 +77,13 @@ try{
 				throw new Exception('Connectez vous pour créer un évènement !');
 			}
 		}
+
+
+
+		elseif($_GET['action']=='addImg'){
+			addImg();
+		}
+
 
 
 		elseif($_GET['action']=='eventModification'){
@@ -99,8 +106,8 @@ try{
 		elseif($_GET['action']=='modifEvent'){
 			if(isset($_SESSION['id'])){
 				if(isset($_GET['id'])){
-					if(!empty($_POST['title']) && !empty($_POST['dateHour']) && !empty($_POST['place']) && !empty($_POST['type']) && !empty($_POST['description'])){
-						modifEvent(htmlspecialchars($_POST['title']), $_POST['dateHour'], $_POST['place'], $_POST['type'], $_POST['description']);
+					if(!empty($_POST['title']) && !empty($_POST['dateHour']) && !empty($_POST['place']) && !empty($_POST['city']) && !empty($_POST['type']) && !empty($_POST['description'])){
+						modifEvent(htmlspecialchars($_POST['title']), $_POST['dateHour'], $_POST['place'],  $_POST['city'], $_POST['type'], $_POST['description']);
 					}
 					else{
 						throw new Exception('Veuillez remplir tous les champs');
@@ -136,6 +143,12 @@ try{
 
 		elseif($_GET['action']=="signalEvent"){
 			signalEvent();
+		}
+
+
+
+		elseif($_GET['action']=="cancelSignalEvent"){
+			cancelSignalEvent();
 		}
 
 
@@ -275,6 +288,7 @@ try{
 
 	else{
 		listEvents();
+		//listEventsPerPage();
 	}
 
 }

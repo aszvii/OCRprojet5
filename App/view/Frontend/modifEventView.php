@@ -7,7 +7,7 @@
     <h1>Modifier un évènement</h1>
 
 
-    <form method="post" action="index.php?action=modifEvent&id=<?=$_GET['id']?>">
+    <form method="post" action="index.php?action=modifEvent&id=<?=$_GET['id']?>" enctype="multipart/form-data">
 
     	<div class="formDiv">
 			<label for="title">Nom de l'évènement:</label><input type="text" id="title" name="title" value="<?=$resultat['evts_title']?>">
@@ -21,22 +21,35 @@
 			<label for="place">Lieu:</label><input type="text" id="place" name="place" value="<?=$resultat['evts_place']?>">
 	    </div>
 
+	     <div class="formDiv">
+			<label for="city">Ville:</label><input type="text" id="city" name="city" value="<?=$resultat['evts_city']?>">
+	    </div>
+
 	    <div class="formDiv">
 			<label for="type">Type d'évènement:</label>
 			<select name="type" id="type">
-    			<option value="sport">Sport</option>
-   				<option value="musique">Musique</option>
-    			<option value="culture">Culture</option>
-    			<option value="gastronomie">Gastronomie</option>
-   	 			<option value="art">Art</option>
-    			<option value="commerce">Commerce</option>
-    			<option value="autre">Autre</option>
+				<option value="">--Choisissez un type d'évènement--</option>
+    			<option value="1">Sport</option>
+   				<option value="2">Musique</option>
+    			<option value="3">Culture</option>
+    			<option value="4">Gastronomie</option>
+   	 			<option value="5">Art</option>
+    			<option value="6">Commerce</option>
+    			<option value="7">Autre</option>
 			</select>
 	    </div>
 
 	    <div id="formDescription">
 			<label for="description">Description</label><textarea id="description"  name="description"><?=$resultat['evts_description']?></textarea>
 	    </div>
+
+	    <div id="picEvent">
+    
+     			<input type="hidden"  name="MAX_FILE_SIZE" value="2000000">
+     			<label for="eventPic">Photo <em>(max size: 100ko)</em>: <input type="file" id="eventPic" name="eventPic"></p>
+	
+	    </div>
+
 
 	   	<input type="submit" value="Modifier évènement">
 	   

@@ -50,8 +50,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 							<li><a href="">Modifier mon profil</a></li>
 							<li><a href="index.php?action=eventCreation">Créer un évènement</a></li>
 							<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
-							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
 							<li><a href="index.php?action=admin">Administration</a></li>
+							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
 						</ul>
 
 <?php

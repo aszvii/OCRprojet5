@@ -22,9 +22,119 @@ function listEvents(){
 	else{
 
 		require('App/view/Frontend/listEventsView.php');
+
 	}
 
 }
+
+
+function listEventsPerPage(){
+
+
+	$eventsManager = new EventsManager();
+
+	$result=$eventsManager->getNbEvents();
+
+
+	if($result==false){
+		throw new Exception('Impossible d\'obtenir le nombre d\'évènements');
+	}
+	else{
+
+		//On récupère la valeur du paramètre page
+		if(isset($_GET['page']) && !empty($_GET['page'])){
+    		$currentPage = (int) strip_tags($_GET['page']);
+		}
+		else{
+    		$currentPage = 1;
+		}
+
+		var_dump($currentPage);
+
+
+
+		$result2=$result->fetch();
+		
+		$nbEvents= (int) $result2['nb_events'];
+
+		//Nombre d'article qu'on souhaite affiché par page
+		$perPage=5;
+
+		//Calcul du nombre total de page nécessaire
+		$pages= ceil($nbEvents / $perPage);
+
+
+		//Calcul du premier article de la page
+		$first= ($currentPage * $perPage) - $perPage ;
+
+
+		var_dump($first);
+		var_dump($perPage);
+
+
+		$req=$eventsManager->getEvents($first, $perPage);
+
+
+		if($req ==false){
+			echo 'Impossible d\'afficher les évènements';
+		}	
+		else{
+			require('App/view/Frontend/listEventsView.php');
+		}
+
+	}
+
+
+
+
+
+
+
+	//On récupère la valeur du paramètre page
+	/*if(isset($_GET['page']) && !empty($_GET['page'])){
+    	$currentPage = (int) strip_tags($_GET['page']);
+	}
+	else{
+    	$currentPage = 1;
+	}
+
+	//On récupère le nombre d'évènement dans la table events
+	
+
+	if($result==false){
+		throw new Exception('Impossible d\'obtenir le nombre d\'évènements');	
+	}
+	else{
+
+		$result2=$result->fetch();
+		
+		$nbEvents= (int) $result2['nb_events'];
+
+		//Nombre d'article qu'on souhaite affiché par page
+		$perPage=5;
+
+		//Calcul du nombre total de page nécessaire
+		$pages= ceil($nbEvents / $perPage);
+
+
+		//Calcul du premier article de la page
+		$first= ($currentPage * $perPage) - $perPage ;
+
+
+
+  		$req=$eventsManager->getEvents($first, $perPage);
+
+
+		if($req ==false){
+			echo 'Impossible d\'afficher les évènements';
+		}	
+		else{
+			require('App/view/Frontend/listEventsView.php');
+		}
+  	}*/
+
+}
+
 
 
 function event(){
@@ -80,11 +190,11 @@ function searchEventPerType($eventType){
 
 
 
-function searchEventPerCity($eventPlace){
+function searchEventPerCity($eventCity){
 
 	$eventsManager= new EventsManager();
 
-	$req= $eventsManager->getEventPerCity($eventPlace);
+	$req= $eventsManager->getEventPerCity($eventCity);
 
 
 
@@ -111,7 +221,7 @@ function eventCreation(){
 }
 
 
-function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventType, $eventDescript){
+/*function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventType, $eventDescript){
 
 	$eventsManager= new EventsManager();
 
@@ -124,7 +234,77 @@ function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventTyp
 	else{
 		header('Location: index.php');
 	}
+}*/
+
+
+
+function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventCity, $eventType, $eventDescript){
+
+	$eventsManager= new EventsManager();
+
+	if(isset($_FILES['eventPic']['tmp_name']) && $_FILES['eventPic']['name']!==""){
+
+		
+     	$dossier = 'upload/';
+
+     	$fichier = basename($_FILES['eventPic']['name']);
+
+     	$taille_maxi = 2000000;
+		
+		$taille = filesize($_FILES['eventPic']['tmp_name']);
+		
+		$extensions = array('.png', '.gif', '.jpg', '.jpeg');
+		
+		$extension = strrchr($_FILES['eventPic']['name'], '.');
+
+
+
+		if(!in_array($extension, $extensions) || !$taille){
+	
+			throw new Exception('Veuillez choisir un fichier au bon format (png, gif, jpg, jpeg, txt ou doc) et ne dépassant pas la taille maximum (2Mo)');
+		}
+		else{
+
+			$newName= $eventCreator.$eventTitle.time().$extension;
+
+     		$fichier= $newName;
+
+     		$fichier = strtr($fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+     		$fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+
+     		$success=move_uploaded_file($_FILES['eventPic']['tmp_name'], $dossier . $fichier);
+
+
+     		if($success){
+
+				$req=$eventsManager->addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventCity, $eventType, $fichier, $eventDescript);
+
+
+				if($req==false){
+					throw new Exception('Impossible d\'ajouter l\'évènement');
+				}
+				else{
+					header('Location: index.php');
+				}
+     		}
+
+		}
+	}
+	else{
+
+		$req=$eventsManager->addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventCity, $eventType, "", $eventDescript);
+
+
+		if($req==false){
+			throw new Exception('Impossible d\'ajouter l\'évènement');
+		}
+		else{
+			header('Location: index.php');
+		}
+	}
+
 }
+
 
 
 
@@ -157,31 +337,100 @@ function eventModifPage(){
 
 
 
-function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript){
+function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity, $newEventType, $newEventDescript){
 
 	$eventsManager= new EventsManager();
 
-	$event= $eventsManager->getEvent($_GET['id']);
 
-	if($event==false){
-		throw new Exception('Impossible de trouver l\'évènement à modifier');
-	}
-	else{
-		$resultats=$event->fetch();
+	if(isset($_FILES['eventPic']['tmp_name']) && $_FILES['eventPic']['name']!==""){
 
-		if($resultats['id_creator']==$_SESSION['id']){
+		
+     	$dossier = 'upload/';
 
-			$req= $eventsManager->modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventType, $newEventDescript, $_GET['id']);
+     	$fichier = basename($_FILES['eventPic']['name']);
 
-			if($req==false){
-				throw new Exception('Impossible de modifier le billet');	
-			}
-			else{
-				header('Location: index.php');
-			}
+     	$taille_maxi = 2000000;
+		
+		$taille = filesize($_FILES['eventPic']['tmp_name']);
+		
+		$extensions = array('.png', '.gif', '.jpg', '.jpeg');
+		
+		$extension = strrchr($_FILES['eventPic']['name'], '.');
+
+
+
+		if(!in_array($extension, $extensions) || !$taille){
+	
+			throw new Exception('Veuillez choisir un fichier au bon format (png, gif, jpg, jpeg, txt ou doc) et ne dépassant pas la taille maximum (2Mo)');
 		}
 		else{
-			throw new Exception('Vous ne pouvez pas modifier un évènement que vous n\'avez pas créé');
+
+			$newName= $_SESSION['id'].$newEventTitle.time().$extension;
+
+
+     		$fichier= $newName;
+
+     		$fichier = strtr($fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+     		$fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+
+     		$success=move_uploaded_file($_FILES['eventPic']['tmp_name'], $dossier . $fichier);
+
+
+     		if($success){
+
+				$event= $eventsManager->getEvent($_GET['id']);
+
+				if($event==false){
+					throw new Exception('Impossible de trouver l\'évènement à modifier');
+				}
+				else{
+					$resultats=$event->fetch();
+
+					if($resultats['id_creator']==$_SESSION['id']){
+
+						$req= $eventsManager->modifEventWithImg($newEventTitle, $newEventDate, $newEventPlace, $newEventCity, $newEventType, $fichier, $newEventDescript, $_GET['id']);
+
+						if($req==false){
+							throw new Exception('Impossible de modifier le billet');	
+						}
+						else{
+
+							header('Location: index.php');
+						}
+					}
+					else{
+						throw new Exception('Vous ne pouvez pas modifier un évènement que vous n\'avez pas créé');
+					}
+				}
+
+			}
+		}
+	}
+
+	else{
+
+		$event= $eventsManager->getEvent($_GET['id']);
+
+		if($event==false){
+			throw new Exception('Impossible de trouver l\'évènement à modifier');
+		}
+		else{
+			$resultats=$event->fetch();
+
+			if($resultats['id_creator']==$_SESSION['id']){
+
+				$req= $eventsManager->modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity, $newEventType, $newEventDescript, $_GET['id']);
+
+				if($req==false){
+					throw new Exception('Impossible de modifier le billet');	
+				}
+				else{
+					header('Location: index.php');
+				}
+			}
+			else{
+				throw new Exception('Vous ne pouvez pas modifier un évènement que vous n\'avez pas créé');
+			}
 		}
 	}
 
@@ -232,7 +481,22 @@ function signalEvent(){
 }
 
 
+//fonction administrateur
+function cancelSignalEvent(){
+	$eventsManager= new EventsManager();
 
+	$req= $eventsManager->cancelSignal($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible d\'annuler le signalement');		
+	}
+	else{
+		getSignalEvent();
+	}
+}
+
+
+//fonction administrateur
 function getSignalEvent(){
 
 	$eventsManager= new EventsManager();
@@ -345,6 +609,7 @@ function addMember($registerName, $registerMail, $registerPassword){
 }
 
 
+
 function connect(){
 	require('App/view/Frontend/connectionView.php');
 }
@@ -358,7 +623,19 @@ function connection($pseudo, $pass){
 
 	$req=$userManager->connect($pseudo);
 
-	$resultat=$req->fetch();
+	if($req==false){
+		throw new Exception('Connexion impossible');
+	}
+	else{
+		if($req->rowCount()==0){
+			throw new Exception('Ce compte n\'existe pas');
+		}
+		else{
+			$resultat=$req->fetch();
+		}
+		
+	}
+	
 
 	$isPasswordCorrect= password_verify($_POST['password'], $resultat['password']);
 
@@ -430,6 +707,8 @@ function signalCom(){
 }
 
 
+
+//fonction administrateur
 function cancelSignal(){
 
 	$commentsManager= new \OCR\Blog\Model\CommentsManager();
@@ -445,6 +724,7 @@ function cancelSignal(){
 }
 
 
+//fonction administrateur
 function showSignal(){
 
 	$commentsManager= new \OCR\Blog\Model\CommentsManager();
@@ -461,6 +741,7 @@ function showSignal(){
 }
 
 
+//fonction administrateur
 function deleteCom(){
 
 	$commentsManager= new \OCR\Blog\Model\CommentsManager();
@@ -476,13 +757,15 @@ function deleteCom(){
 }
 
 
-
+//fonction administrateur
 function admin(){
 	require('App/view/Frontend/adminView.php');
 }
 
 
 
+
+//fonction administrateur
 function listPassedEvents(){
 
 	$eventsManager = new EventsManager();   

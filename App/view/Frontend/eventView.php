@@ -34,8 +34,20 @@
 	<div class="eventPost">
         <h3><?= $data['evts_title'] ?></h3>
 
+
+<?php if($data['evts_img']!==""){
+?>
+        
+        <div id="imgEvent">
+            <img src="upload/<?=$data['evts_img']?>" alt="photo de l'évènement">
+        </div>
+<?php
+}
+?>
+        
+
         <div class="eventPostContent">
-            <p>Lieu: <em><?= htmlspecialchars($data['evts_place']) ?></em></p>
+            <p>Lieu: <em><?= htmlspecialchars($data['evts_place']) ?> (<?=$data['evts_city']?>)</em></p>
             <p>Date et Heure: <em>le <?= $data['date_evts_fr'] ?></em></p>
              <p>type d'évènement: <em><?= $data['type_name'] ?></em></p>
             <p>Organisé par: <em><?= $data['name'] ?></em></p><br/>
