@@ -58,9 +58,9 @@ function deletePassedEvent(){
 
 
 //fonction administrateur
-function showSignal(){
+function showSignalComment(){
 
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
+	$commentsManager= new CommentsManager();
 
 	$req= $commentsManager->showSignalComment();
 
@@ -68,16 +68,16 @@ function showSignal(){
 		throw new Exception('Impossible d\'afficher les commentaires signalés');		
 	}
 	else{
-		require('view/Backend/signalComView.php');
+		require('App/view/Backend/signalComView.php');
 
 	}
 }
 
 
 //fonction administrateur
-function deleteCom(){
+function deleteComment(){
 
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
+	$commentsManager= new CommentsManager();
 
 	$req= $commentsManager->deleteComment($_GET['id']);
 
@@ -85,7 +85,7 @@ function deleteCom(){
 		throw new Exception('Impossible de supprimer le commentaire');
 	}
 	else{
-		header('Location: index.php?action=post&id='. $_GET['post']);
+		header('Location: index.php?action=showSignalComment');
 	}
 }
 
@@ -94,11 +94,11 @@ function deleteCom(){
 
 
 //fonction administrateur
-function cancelSignal(){
+function cancelSignalComment(){
 
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
+	$commentsManager= new CommentsManager();
 
-	$req= $commentsManager->cancelSignal($_GET['id']);
+	$req= $commentsManager->cancelSignalComment($_GET['id']);
 
 	if($req==false){
 		throw new Exception('Impossible de retirer le signalement');

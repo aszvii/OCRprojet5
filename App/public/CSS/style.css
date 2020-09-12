@@ -914,3 +914,164 @@ table td{
 	color: white;
 }
 
+
+
+
+
+
+/*signalComView*/
+
+#signalComViewDiv{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#signalComViewDiv h1{
+	margin-top: 50px;
+	align-self: center;
+}
+
+@media screen and (max-width: 750px){
+	#signalComViewDiv h1{
+		border: 2px solid black;
+		padding: 5px;
+	}
+}
+
+table{
+	width: 80%;
+	border-collapse: collapse;
+	margin-bottom: 200px;
+	margin-top: 50px;
+	align-self: center;
+}
+
+
+table th{
+	border:2px solid black;
+	border-collapse: collapse;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+@media screen and (max-width: 750px){
+	table th{
+		border: none;
+		width: 100%;
+	}
+}
+
+table tr{
+	border-top: 1px solid black;
+}
+
+@media screen and (max-width: 750px){
+	table tr{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-top: 2px solid black;
+		text-align: center;
+		margin: auto;
+	}
+}
+
+table td{
+	border-right: 1px solid black;
+	min-height: 200px;
+	text-align: center;
+	padding: 10px;
+	word-break: break-word;
+}
+
+@media screen and (max-width: 750px){
+	table td{
+		border-right: none;
+		min-height: 40px;
+	}
+}
+
+
+#deleteSignalCom{
+	color: red;
+	font-weight: bold;
+	width:100%;
+	align-self: center;
+	margin:0;
+}
+
+#cancelSignalCom{
+	color: blue;
+	font-weight: bold;
+	width: 100%;
+	align-self: center;
+	margin:0;
+}
+
+#deleteSignalCom a{
+	color: red;
+}
+
+#cancelSignalCom a{
+	color: green;
+}
+
+#actionSignalButton{
+	border-right: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding-left: 5px;
+}
+
+@media screen and (max-width: 750px){
+	#actionSignalButton{
+		flex-direction: row;
+		padding-left: 0px;
+		border-top: 1px solid RGBa(0, 0, 0, 0.4);
+		width: 100%;
+		align-items: center;
+	}
+}
+
+#signalCommentLink:hover{
+	color: black;
+}
+
+#signalCommentLink{
+	text-decoration: underline;
+	word-break: keep-all;
+}
+
+#actionSignalButton button{
+	font-weight: bold;
+}
+
+#dateTable{
+	width: 20%;
+	font-style: italic;
+}
+
+@media screen and (max-width: 750px){
+	#dateTable{
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.1);
+		margin: 5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+#authorTable{
+	font-weight: bold;
+}
+
+@media screen and (max-width: 750px){
+	#titleTr{
+		background-color: RGBa(184, 143, 54, 0.5);
+		border-top: 5px solid black;
+		border-bottom: 2px solid black;
+	}
+}

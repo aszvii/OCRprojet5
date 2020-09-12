@@ -250,7 +250,59 @@ try{
 
 
 		elseif($_GET['action']=="signalComment"){
-			signalCom();
+			if(isset($_SESSION['id'])){
+				signalCom();
+			}
+			else{
+				throw new Exception('Vous ne pouvez pas effectuer cette action');
+			}
+		}
+
+
+
+		elseif($_GET['action']=="showSignalComment"){
+			if(isset($_SESSION['type']) && $_SESSION['type']==1){
+				showSignalComment();
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
+			}
+		}
+
+
+
+
+		elseif($_GET['action']=="cancelSignalComment"){
+			if(isset($_SESSION['id']) && isset($_SESSION['type']) && $_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					cancelSignalComment();
+				}
+				else{
+					throw new Exception('Aucun commentaire trouvé');
+					
+				}
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour effectuer cette action');	
+			}
+		}
+
+
+
+
+		elseif($_GET['action']=="deleteComment"){
+			if(isset($_SESSION['id']) && isset($_SESSION['type']) && $_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deleteComment();
+				}
+				else{
+					throw new Exception('Aucun commentaire à supprimer');
+					
+				}
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour effectuer cette action');	
+			}
 		}
 
 

@@ -84,6 +84,19 @@ class EventsManager extends Manager
 
 
 
+	public function getAllType(){
+
+		$db=$this->dbConnect();
+
+		$req=$db->query('SELECT id, type_name FROM events_type ORDER BY id');
+
+		return $req;
+	}
+
+
+
+
+
 	public function getEventPerCity($eventCity){
 
 		$db=$this->dbConnect();

@@ -25,19 +25,27 @@
 			<label for="city">Ville:</label><input type="text" id="city" name="city" value="<?=$resultat['evts_city']?>">
 	    </div>
 
+
 	    <div class="formDiv">
 			<label for="type">Type d'évènement:</label>
 			<select name="type" id="type">
 				<option value="">--Choisissez un type d'évènement--</option>
-    			<option value="1">Sport</option>
-   				<option value="2">Musique</option>
-    			<option value="3">Culture</option>
-    			<option value="4">Gastronomie</option>
-   	 			<option value="5">Art</option>
-    			<option value="6">Commerce</option>
-    			<option value="7">Autre</option>
+
+
+
+   			
+<?php while ($type=$types->fetch()): ?>
+
+					<option value="<?= $type['id']?>" > <?=$type['type_name']?> </option>
+
+<?php endwhile; ?>
+
+<?php $types->closeCursor(); ?>
+
+
 			</select>
 	    </div>
+
 
 	    <div id="formDescription">
 			<label for="description">Description</label><textarea id="description"  name="description"><?=$resultat['evts_description']?></textarea>

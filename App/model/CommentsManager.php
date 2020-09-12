@@ -62,12 +62,12 @@ class CommentsManager extends Manager
 	}
 
 
-	public function cancelSignal($commentId){
+	public function cancelSignalComment($commentId){
 
 		$db=$this->dbConnect();
 
 		
-		$req= $db->prepare('UPDATE comments SET signalment=0 WHERE id=?');
+		$req= $db->prepare('UPDATE comments SET signalement=0 WHERE id=?');
 
 		$req->execute(array($commentId));
 
@@ -79,7 +79,7 @@ class CommentsManager extends Manager
 
 		$db=$this->dbConnect();
 
-		$req=$db->query('SELECT comments.id, comments.post_id, comments.comment, DATE_FORMAT(comments.comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr, members.name FROM comments INNER JOIN members ON comments.member_id=members.id WHERE signalment=1');
+		$req=$db->query('SELECT comments.id, comments.id_evts, comments.comment, DATE_FORMAT(comments.comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr, members.name FROM comments INNER JOIN members ON comments.id_members=members.id WHERE signalement=1');
 
 		return $req;
 	}

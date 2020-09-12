@@ -217,7 +217,17 @@ function searchEventPerCity($eventCity){
 
 
 function eventCreation(){
-	require('App/view/Frontend/addEventView.php');
+
+	$eventsManager= new EventsManager();
+
+	$types=$eventsManager->getAllType();
+
+	if($types==false){
+		throw new Exception('Erreur lors de la requête');
+	}
+	else{
+		require('App/view/Frontend/addEventView.php');
+	}
 }
 
 
@@ -241,6 +251,8 @@ function eventCreation(){
 function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventCity, $eventType, $eventDescript){
 
 	$eventsManager= new EventsManager();
+
+
 
 	if(isset($_FILES['eventPic']['tmp_name']) && $_FILES['eventPic']['name']!==""){
 
@@ -315,6 +327,8 @@ function eventModifPage(){
 	$req= $eventsManager->getEvent($_GET['id']);
 
 
+
+
 	if($req==false){
 		throw new Exception('Impossible d\'ouvrir la page');	
 	}
@@ -325,6 +339,9 @@ function eventModifPage(){
 		$resultat=$req->fetch(); 
 
 		if($resultat['id_creator']==$_SESSION['id']){
+
+			$types= $eventsManager->getAllType();
+			
 			require('App/view/Frontend/modifEventView.php');
 		}
 		else{
