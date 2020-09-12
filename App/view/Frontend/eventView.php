@@ -11,18 +11,18 @@
 
 <section id="postSection">
 
-<?php if (isset($_SESSION['id'])): ?>
+<?php if (isset($_SESSION['type']) && $_SESSION['type']==0): ?>
 
     <div id="inscriptionButton">
 
-<?php if($verif->rowCount()==0){ ?>
-        <p><a id="inscriptionLink" href="index.php?action=eventInscription&id=<?= $data['id'] ?>">Je souhaites participer à cet évènement</a></p>
-<?php }
-      else{ $inscript=$verif->fetch() ?>
+<?php   if($verif->rowCount()==0){ ?>
+            <p><a id="inscriptionLink" href="index.php?action=eventInscription&id=<?= $data['id'] ?>">Je souhaites participer à cet évènement</a></p>
+<?php   }
+        else{ $inscript=$verif->fetch() ?>
 
-        <p><a id="deleteInscriptionLink" href="index.php?action=deleteInscription&id=<?=$inscript['id']?>&event=<?=$data['id']?>">Je ne veux plus y participer</a></p>   <!--Mettre bouton pour se désinscrire-->
+            <p><a id="deleteInscriptionLink" href="index.php?action=deleteInscription&id=<?=$inscript['id']?>&event=<?=$data['id']?>">Je ne veux plus y participer</a></p>
 <?php
-      }
+        }
       $verif->closeCursor();
 ?>
 

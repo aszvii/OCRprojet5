@@ -46,7 +46,7 @@
 	    <div id="picEvent">
     
      			<input type="hidden"  name="MAX_FILE_SIZE" value="2000000">
-     			<label for="eventPic">Photo <em>(max size: 100ko)</em>: <input type="file" id="eventPic" name="eventPic"></p>
+     			<label for="eventPic">Photo (facultatif) <em>(max size: 2Mo)</em>: <input type="file" id="eventPic" name="eventPic"></p>
 	
 	    </div>
 

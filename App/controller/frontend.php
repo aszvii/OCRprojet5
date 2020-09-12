@@ -425,7 +425,7 @@ function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity
 					throw new Exception('Impossible de modifier le billet');	
 				}
 				else{
-					header('Location: index.php');
+					header('Location: index.php?action=showEventsInscription');
 				}
 			}
 			else{
@@ -435,6 +435,7 @@ function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity
 	}
 
 }
+
 
 
 
@@ -454,7 +455,8 @@ function deleteEvent(){
 		$resultats=$event->fetch();
 
 		if($resultats['id_creator']==$_SESSION['id']){
-			showEventsInscription();
+
+			header('Location: index.php?action=showEventsInscription');
 		}
 		else{
 			throw new Exception('Vous n\'avez pas le droit de supprimer cet évènement');
@@ -462,7 +464,6 @@ function deleteEvent(){
 		}	
 	}
 }
-
 
 
 
@@ -481,53 +482,6 @@ function signalEvent(){
 }
 
 
-//fonction administrateur
-function cancelSignalEvent(){
-	$eventsManager= new EventsManager();
-
-	$req= $eventsManager->cancelSignal($_GET['id']);
-
-	if($req==false){
-		throw new Exception('Impossible d\'annuler le signalement');		
-	}
-	else{
-		header('Location: index.php?action=showSignalEvent');
-	}
-}
-
-
-
-function deleteSignalEvent(){
-
-	$eventsManager= new EventsManager();
-
-	$req= $eventsManager->deleteEvent($_GET['id']);
-
-	if($req==false){
-		throw new Exception('Impossible de supprimer l\'évènement');		
-	}
-	else{
-		header('Location: index.php?action=showSignalEvent');
-	}
-}
-
-
-
-
-//fonction administrateur
-function getSignalEvent(){
-
-	$eventsManager= new EventsManager();
-
-	$req=$eventsManager->getSignalEvent();
-
-	if($req==false){
-		throw new Exception('Impossible d\'afficher les évènements');
-	}
-	else{
-		require('App/view//Backend/signalEventView.php');
-	}
-}
 
 
 
@@ -552,6 +506,7 @@ function eventInscription(){
 		throw new Exception('Vous êtes déjà inscrit à cet évènement');	
 	}
 }
+
 
 
 
@@ -726,92 +681,15 @@ function signalCom(){
 
 
 
-//fonction administrateur
-function cancelSignal(){
-
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
-
-	$req= $commentsManager->cancelSignal($_GET['id']);
-
-	if($req==false){
-		throw new Exception('Impossible de retirer le signalement');
-	}
-	else{
-		header('Location: index.php?action=showSignalComment');
-	}
-}
-
-
-//fonction administrateur
-function showSignal(){
-
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
-
-	$req= $commentsManager->showSignalComment();
-
-	if($req==false){
-		throw new Exception('Impossible d\'afficher les commentaires signalés');		
-	}
-	else{
-		require('view/Backend/signalComView.php');
-
-	}
-}
-
-
-//fonction administrateur
-function deleteCom(){
-
-	$commentsManager= new \OCR\Blog\Model\CommentsManager();
-
-	$req= $commentsManager->deleteComment($_GET['id']);
-
-	if($req==false){
-		throw new Exception('Impossible de supprimer le commentaire');
-	}
-	else{
-		header('Location: index.php?action=post&id='. $_GET['post']);
-	}
-}
-
-
-//fonction administrateur
-function admin(){
-	require('App/view/Backend/adminView.php');
-}
 
 
 
 
-//fonction administrateur
-function listPassedEvents(){
-
-	$eventsManager = new EventsManager();   
-
-	$req=$eventsManager->getPassedEvents();
 
 
-	if($req ==false){
-		echo 'Impossible d\'afficher les évènements';
-	}
-	else{
 
-		require('App/view/Backend/passedEventsView.php');
-	}
-}
 
-//fonction administrateur
-function deletePassedEvent(){
 
-	$eventsManager= new EventsManager();
 
-	$req= $eventsManager->deleteEvent($_GET['id']);
 
-	if($req==false){
-		throw new Exception('Impossible de supprimer l\'évènement');		
-	}
-	else{
-		header('Location: index.php?action=passedEvents');
-	}
 
-}

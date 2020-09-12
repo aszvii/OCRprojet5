@@ -7,6 +7,7 @@ if(!isset($_SESSION)){
 
 
 require('App/controller/frontend.php');
+require('App/controller/backend.php');
 
 
 
@@ -142,19 +143,49 @@ try{
 
 
 		elseif($_GET['action']=="signalEvent"){
-			signalEvent();
+			if(isset($_SESSION['id'])){
+				if(isset($_GET['id'])){
+					signalEvent();
+				}
+				else{
+					throw new Exception('Aucun évènement à signaler');
+				}
+			}
+			else{
+				throw new Exception('Vous devez être connecté pour signaler un évènement');
+			}
 		}
 
 
 
 		elseif($_GET['action']=="cancelSignalEvent"){
-			cancelSignalEvent();
+			if(isset($_SESSION['type']) && $_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					cancelSignalEvent();
+				}
+				else{
+					throw new Exception('Aucun id d\'évènement n\'a été envoyé');
+				}
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour effectuer cette action');
+			}
 		}
 
 
 
 		elseif($_GET['action']=="deleteSignalEvent"){
-			deleteSignalEvent();
+			if(isset($_SESSION['type']) && $_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deleteSignalEvent();
+				}
+				else{
+					throw new Exception('Aucun évènement à supprimer');
+				}
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour effectuer cette action');
+			}
 		}
 
 
@@ -163,8 +194,9 @@ try{
 		}
 
 
+
 		elseif ($_GET['action']=="eventInscription"){
-			if(isset($_SESSION['id'])){
+			if(isset($_SESSION['id']) && isset($_SESSION['type']) && $_SESSION['type']==0){
 				if(isset($_GET['id'])){
 					eventInscription();
 				}
@@ -180,7 +212,7 @@ try{
 
 
 		elseif($_GET['action']=="deleteInscription"){
-			if(isset($_SESSION['id'])){
+			if(isset($_SESSION['id']) && isset($_SESSION['type']) && $_SESSION['type']==0){
 				if(isset($_GET['id'])){
 					deleteInscription();
 				}
@@ -280,18 +312,38 @@ try{
 
 
 		elseif($_GET['action']=='admin'){
-			admin();
+			if(isset($_SESSION['type']) && $_SESSION['type']==1){
+				admin();
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
+			}
 		}
 
 
 
 		elseif($_GET['action']=="passedEvents"){
-			listPassedEvents();
+			if(isset($_SESSION['type']) && $_SESSION['type']==1){
+				listPassedEvents();
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour accéder à cette rubrique');
+			}
 		}
 
 
 		elseif($_GET['action']=="deletePassedEvent"){
-			deletePassedEvent();
+			if(isset($_SESSION['type']) && $_SESSION['type']==1){
+				if(isset($_GET['id'])){
+					deletePassedEvent();
+				}
+				else{
+					throw new Exception('Aucun évènement à supprimer');
+				}
+			}
+			else{
+				throw new Exception('Vous n\'avez pas les droits pour effectuer cette action');
+			}
 		}
 	}
 
