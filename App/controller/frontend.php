@@ -491,9 +491,27 @@ function cancelSignalEvent(){
 		throw new Exception('Impossible d\'annuler le signalement');		
 	}
 	else{
-		getSignalEvent();
+		header('Location: index.php?action=showSignalEvent');
 	}
 }
+
+
+
+function deleteSignalEvent(){
+
+	$eventsManager= new EventsManager();
+
+	$req= $eventsManager->deleteEvent($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de supprimer l\'évènement');		
+	}
+	else{
+		header('Location: index.php?action=showSignalEvent');
+	}
+}
+
+
 
 
 //fonction administrateur
@@ -780,4 +798,20 @@ function listPassedEvents(){
 
 		require('App/view/Frontend/passedEventsView.php');
 	}
+}
+
+//fonction administrateur
+function deletePassedEvent(){
+
+	$eventsManager= new EventsManager();
+
+	$req= $eventsManager->deleteEvent($_GET['id']);
+
+	if($req==false){
+		throw new Exception('Impossible de supprimer l\'évènement');		
+	}
+	else{
+		header('Location: index.php?action=passedEvents');
+	}
+
 }

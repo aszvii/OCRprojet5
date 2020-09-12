@@ -153,6 +153,11 @@ try{
 
 
 
+		elseif($_GET['action']=="deleteSignalEvent"){
+			deleteSignalEvent();
+		}
+
+
 		elseif($_GET['action']=="showSignalEvent"){
 			getSignalEvent();
 		}
@@ -282,6 +287,11 @@ try{
 
 		elseif($_GET['action']=="passedEvents"){
 			listPassedEvents();
+		}
+
+
+		elseif($_GET['action']=="deletePassedEvent"){
+			deletePassedEvent();
 		}
 	}
 

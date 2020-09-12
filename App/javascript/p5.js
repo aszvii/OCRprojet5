@@ -49,24 +49,43 @@ document.querySelector("#participate").addEventListener("click", function(){
 	
 
 
-document.querySelector("#organised").addEventListener("mouseover", function(){
+
+if(document.querySelector("#organisedSection").style.display=="none"){
+	
+	document.querySelector("#organised").addEventListener("mouseover", function(){
 		document.querySelector("#organised").style.opacity="1";
+		console.log('mouse');
 		console.log('mouseover#organised');
-})
+	})	
 
 
-document.querySelector("#participate").addEventListener("mouseover", function(){
-	document.querySelector("#participate").style.opacity="1";
-})
-
-
-document.querySelector("#organised").addEventListener("mouseleave", function(){
+	document.querySelector("#organised").addEventListener("mouseleave", function(){
 		document.querySelector("#organised").style.opacity="0.5";
 		console.log('mouseleave#organised');
-})
+	})
+}
 
 
-document.querySelector("#participate").addEventListener("mouseleave", function(){
-	document.querySelector("#participate").style.opacity="0.5";
-})
+
+
+if(document.querySelector("#participateSection").style.display=="none"){
+	
+	document.querySelector("#participate").addEventListener("mouseover", function(){
+		document.querySelector("#participate").style.opacity="1";
+	})
+
+
+	document.querySelector("#participate").addEventListener("mouseleave", function(){
+		document.querySelector("#participate").style.opacity="0.5";
+	})
+
+}
+
+
+
+
+
+
+
+
 

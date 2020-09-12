@@ -216,7 +216,7 @@ class EventsManager extends Manager
 
 		$db=$this->dbConnect();
 
-		$req = $db->prepare('SELECT events_inscription.id, events_inscription.id_members, events_inscription.id_evts, events.id, events.id_creator, events.evts_title, DATE_FORMAT(events.evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, events.evts_place, events.evts_city, events.evts_description FROM events_inscription INNER JOIN events ON events_inscription.id_evts=events.id WHERE id_members=?');
+		$req = $db->prepare('SELECT events_inscription.id, events_inscription.id_members, events_inscription.id_evts, events.id, events.id_creator, events.evts_title, DATE_FORMAT(events.evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, events.evts_place, events.evts_city, events.evts_description FROM events_inscription INNER JOIN events ON events_inscription.id_evts=events.id WHERE id_members=? ORDER BY evts_date');
 		$req->execute(array($pseudo));
 
 		return $req;
@@ -227,7 +227,7 @@ class EventsManager extends Manager
 
 		$db=$this->dbConnect();
 
-		$req = $db->prepare('SELECT id, id_creator, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_city, evts_description FROM events WHERE id_creator=?');
+		$req = $db->prepare('SELECT id, id_creator, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_city, evts_description FROM events WHERE id_creator=? ORDER BY evts_date');
 		$req->execute(array($pseudo));
 
 		return $req;

@@ -559,20 +559,20 @@ footer{
 	text-decoration: underline;
 	width: 50%;
 	text-align: center;
-	box-shadow: inset -2px -2px 5px black;
-	background-color: RGB(229, 223, 221);
-	opacity: 0.5;
 }
 
 #participate{
 	text-decoration: underline;
 	width: 50%;
 	text-align: center;
+	box-shadow: inset 2px -2px 5px black;
+	background-color: RGB(229, 223, 221);
+	opacity: 0.5;
 }
 
 
 #participateSection{
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
 	margin-top: 25px;
@@ -581,7 +581,7 @@ footer{
 
 
 #organisedSection{
-	display: none;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	margin-top: 25px;
@@ -626,16 +626,19 @@ footer{
 #seeEventLink{
 	color: blue;
 	font-weight: normal;
+	text-decoration: none;
 }
 
 #modifyEventLink{
 	color: green;
 	font-weight: normal;
+	text-decoration: none;
 }
 
 #deleteEventLink{
 	color: red;
 	font-weight: normal;
+	text-decoration: none;
 }
 
 
