@@ -566,7 +566,7 @@ footer{
 	width: 50%;
 	text-align: center;
 	box-shadow: inset 2px -2px 5px black;
-	background-color: RGB(229, 223, 221);
+	background-color: RGBa(229, 223, 221, 1);
 	opacity: 0.5;
 }
 

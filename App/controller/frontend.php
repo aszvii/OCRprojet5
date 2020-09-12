@@ -525,7 +525,7 @@ function getSignalEvent(){
 		throw new Exception('Impossible d\'afficher les évènements');
 	}
 	else{
-		require('App/view//Frontend/signalEventView.php');
+		require('App/view//Backend/signalEventView.php');
 	}
 }
 
@@ -777,7 +777,7 @@ function deleteCom(){
 
 //fonction administrateur
 function admin(){
-	require('App/view/Frontend/adminView.php');
+	require('App/view/Backend/adminView.php');
 }
 
 
@@ -796,7 +796,7 @@ function listPassedEvents(){
 	}
 	else{
 
-		require('App/view/Frontend/passedEventsView.php');
+		require('App/view/Backend/passedEventsView.php');
 	}
 }
 

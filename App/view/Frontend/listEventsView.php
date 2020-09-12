@@ -49,7 +49,7 @@
 
 <?php while ($data=$req->fetch()): ?>
 
-	<div class="evtsPost" id="cible">
+	<div class="evtsPost">
 		<p class="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?> (<?=$data['evts_city']?>), le <?= $data['date_evts_fr'] ?></em></p>
 		<h3 class="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= $data['evts_title'] ?></a></h3>
 		<div class="postDescript"><?= $data['evts_description'] ?></div>

@@ -31,4 +31,4 @@
 
 <?php $content= ob_get_clean(); ?>
 
-<?php require ('template2.php'); ?>
+<?php require ('App/view/Frontend/template2.php'); ?>

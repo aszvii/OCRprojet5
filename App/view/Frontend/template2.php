@@ -54,10 +54,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
 
 						<ul id="profilMenuRoll">
 							<li><i id="closeMenu" class="fas fa-window-close"></i></li>
-							<a href=""><li>Modifier mon profil</li></a>
+							<!--<a href=""><li>Modifier mon profil</li></a>-->
 							<a href="index.php?action=eventCreation"><li>Créer un évènement</li></a>
-							<a href="index.php?action=showEventsInscription"><li>Mon agenda</li></a>
-							<a href="index.php?action=admin"><li>Administration</li></a>
+
+							<?php 	if($_SESSION['type']==0){?>
+										<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
+							<?php 	}
+									elseif($_SESSION['type']==1){?>
+							
+										<li><a href="index.php?action=admin">Administration</a></li>
+							<?php 	}?>
+
 							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
 						</ul>
 

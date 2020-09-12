@@ -40,17 +40,24 @@
 					<div id="profilMenu">
 
 <?php 
-if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
+if (isset($_SESSION['id']) && isset($_SESSION['type'])){
 ?>
 
 						<a id="profilMenuLink" href=""><i class="fas fa-user-circle"></i></a>
 
 						<ul id="profilMenuRoll">
 							<li><i id="closeMenu" class="fas fa-window-close"></i></li>
-							<li><a href="">Modifier mon profil</a></li>
+							<!--<li><a href="">Modifier mon profil</a></li>-->
 							<li><a href="index.php?action=eventCreation">Créer un évènement</a></li>
-							<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
-							<li><a href="index.php?action=admin">Administration</a></li>
+
+							<?php 	if($_SESSION['type']==0){?>
+										<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
+							<?php 	}
+									elseif($_SESSION['type']==1){?>
+							
+										<li><a href="index.php?action=admin">Administration</a></li>
+							<?php 	}?>
+
 							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
 						</ul>
 
@@ -77,9 +84,9 @@ else{
 					<div id="sliderContent">
 						<div id="textSlider">
 							<h2>Il y a toujours quelque chose à faire près de chez vous.</h1>
-							<p>Rejoignez la communauté "on the Corner" et partagez de nombreux évènements avec les autres membres...</p>
+							<p>Rejoignez la communauté "on the Corner", partagez et participez à de nombreux évènements avec les autres membres...</p>
 							<div id="sliderButton">
-								<button><a href="#cible">Voir les évènements à venir</a></button>
+								<button><a href="#IdContent">Voir les évènements à venir</a></button>
 							</div>
 						</div>
 					</div>
