@@ -63,31 +63,33 @@
 
 
 
-<!--<nav>
+<nav>
 	<ul class="pagination">
 
-        <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>" >
-            <a href="index.php?action=listEvents&page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
+        <li class="page-item <?php if($currentPage==1):?> disableLink <?php endif;?>" >
+            <a href="index.php?action=listEvents&page=<?= $currentPage - 1 ?>" class="page-link <?php if($currentPage==1):?> firstLastPage <?php endif;?>">Précédente</a>
         </li>
+
         <?php for($page = 1; $page <= $pages; $page++): ?>
-           COMMENTAIRE Lien vers chacune des pages (activé si on se trouve sur la page correspondante) 
-            <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                <a href="index.php?action=listEvents&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+           <!--COMMENTAIRE Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+            <li class="page-item <?php if($currentPage==$page):?> disableLink <?php endif;?>">
+                <a href="index.php?action=listEvents&page=<?= $page ?>" class="page-link <?php if($currentPage==$page):?> firstLastPage <?php endif;?>"><?= $page ?></a>
             </li>
-        <?php endfor ?>
-            COMMENTAIRELien vers la page suivante (désactivé si on se trouve sur la dernière page) 
-            <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-            <a href="index.php?action=listEvents&page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
+        <?php endfor; ?>
+
+           <!-- COMMENTAIRELien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+        <li class="page-item <?php if($currentPage==$pages):?> disableLink <?php endif;?>">
+            <a href="index.php?action=listEvents&page=<?= $currentPage + 1 ?>" class="page-link <?php if($currentPage==$pages):?> firstLastPage <?php endif;?>">Suivante</a>
         </li>
     </ul>
-</nav> -->
+</nav> 
 
 
 </section>
 
 
+
 <?php $content= ob_get_clean(); ?>
 
 <?php require ('template.php'); ?>
-
 

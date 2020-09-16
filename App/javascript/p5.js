@@ -1,4 +1,3 @@
-
 // Faire apparaître et disparaître le menu déroulant
 
 
@@ -14,7 +13,6 @@ document.querySelector("#closeMenu").addEventListener ("click", function(){
 
 	document.querySelector("#profilMenuRoll").style.display="none";
 })
-
 
 
 

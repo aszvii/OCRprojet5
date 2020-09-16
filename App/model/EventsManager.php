@@ -37,8 +37,10 @@ class EventsManager extends Manager
 		
 		$db=$this->dbConnect();
 
-		$req = $db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_city, evts_description FROM events WHERE evts_date > NOW() ORDER BY evts_date LIMIT ?, ?');
-		$req->execute($firstEvent, $eventsPerPage);
+		$req = $db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_city, evts_description FROM events WHERE evts_date > NOW() ORDER BY evts_date LIMIT :firstEvent, :eventsPerPage');
+		$req->bindValue(':firstEvent', $firstEvent, \PDO::PARAM_INT);
+		$req->bindValue(':eventsPerPage', $eventsPerPage, \PDO::PARAM_INT);
+		$req->execute();
 
 		return $req;
 	}
@@ -51,10 +53,23 @@ class EventsManager extends Manager
 
 		/*$req = $db->prepare('SELECT id, evts_title, DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, evts_place, evts_description FROM events WHERE id=?');*/
 
-		$req = $db->prepare('SELECT events.id, events.id_creator, events.evts_title, DATE_FORMAT(events.evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, events.evts_place, events.evts_city, events.evts_type, events.evts_img, events.evts_description, members.name, events_type.type_name FROM events INNER JOIN members ON events.id_creator=members.id INNER JOIN events_type ON events.evts_type=events_type.id WHERE events.id=?');
+		$req = $db->prepare('SELECT events.id, events.id_creator, events.evts_title, events.evts_date, DATE_FORMAT(events.evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr, events.evts_place, events.evts_city, events.evts_type, events.evts_img, events.evts_description, members.name, events_type.type_name FROM events INNER JOIN members ON events.id_creator=members.id INNER JOIN events_type ON events.evts_type=events_type.id WHERE events.id=?');
 		$req->execute(array($eventId));
 
 		return $req;      
+	}
+
+
+
+	public function getEventRegisteredMembers($eventId){
+
+		$db=$this->dbConnect();
+
+		$req= $db->prepare(' SELECT COUNT(*) AS nb_Registered FROM events_inscription WHERE id_evts=?');
+		$req->execute(array($eventId));
+
+		return $req;
+
 	}
 
 
@@ -156,6 +171,34 @@ class EventsManager extends Manager
 
 		return $req;
 	}
+
+
+
+	public function verifyImg($eventId){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('SELECT evts_img FROM events WHERE id=?');
+		$req->execute(array($eventId));
+
+		return $req;
+	}
+
+
+
+	public function getEventDate($eventId){
+
+		$db=$this->dbConnect();
+
+
+		$req=$db->prepare('SELECT DATE_FORMAT(evts_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date_evts_fr FROM events WHERE id=? ');//yyyy-MM-ddThh:mm
+		$req->execute(array($eventId));
+
+
+		return $req;
+	}
+
+
 
 
 

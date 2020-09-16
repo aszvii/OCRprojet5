@@ -312,6 +312,17 @@ footer{
 }
 
 
+.firstLastPage{
+	text-decoration: none;
+}
+
+
+
+.disableLink{
+	pointer-events: none;
+	color: grey;
+}
+
 /* EVENTVIEW */
 
 
@@ -355,7 +366,7 @@ footer{
 }
 
 .eventPost h3{
-	font-size: 35px;
+	font-size: 50px;
 	text-align: center;
 	text-decoration: underline;
 	color: orange;
@@ -403,6 +414,16 @@ footer{
 }
 
 
+#commentContent{
+	border-top: 1px solid black;
+}
+
+
+.postCommentDate{
+	font-style: italic;
+}
+
+
 #connectToComment{
 	margin-top: 60px;
 	font-style: italic;
@@ -428,6 +449,56 @@ footer{
 
 #imgEvent img{
 	width: 100%;
+}
+
+
+
+#nbRegistered{
+	margin-top: 50px;
+	text-align: right;
+	text-decoration: underline;
+	color: orange;
+	font-size: 15px;
+}
+
+
+#meteo{
+	background-color: RGBa(75,175,245, 0.5);
+	margin-bottom: 30px;
+}
+
+#meteo h3{
+	text-decoration: none;
+	font-style: italic;
+	color: black;
+	font-size: 30px;
+}
+
+#imgMeteo{
+	position: relative;
+}
+
+
+#day{
+	font-size: 25px;
+}
+
+
+#temp{
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 20px;
+}
+
+
+#tMax, #tMin{
+	font-weight: bold;
+}
+
+
+#noMeteo{
+	font-style: italic;
 }
 
 

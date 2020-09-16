@@ -49,7 +49,7 @@ function listEventsPerPage(){
     		$currentPage = 1;
 		}
 
-		var_dump($currentPage);
+		//var_dump($currentPage);
 
 
 
@@ -68,11 +68,8 @@ function listEventsPerPage(){
 		$first= ($currentPage * $perPage) - $perPage ;
 
 
-		var_dump($first);
-		var_dump($perPage);
 
-
-		$req=$eventsManager->getEvents($first, $perPage);
+		$req=$eventsManager->getEventsPerPage($first, $perPage);
 
 
 		if($req ==false){
@@ -142,9 +139,16 @@ function event(){
 	$eventsManager = new EventsManager();
 	$commentsManager= new CommentsManager();
 
+
 	$req=$eventsManager->getEvent($_GET['id']);
 
 	$comments=$commentsManager->getComments($_GET['id']);
+
+
+
+	$registered=$eventsManager->getEventRegisteredMembers($_GET['id']);
+
+
 
 	if(isset($_SESSION['id'])){
 		$verif=$eventsManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
@@ -158,6 +162,9 @@ function event(){
 		throw new Exception('Le billet demandé n\'existe pas');
 	}
 	else {
+
+		$deadLine= time() + (4*24*60*60);
+
 		require('App/view/Frontend/eventView.php');
 	}
 
@@ -327,6 +334,19 @@ function eventModifPage(){
 	$req= $eventsManager->getEvent($_GET['id']);
 
 
+	
+                                                          //POURQUOI LA FONCTION NE FONCTIONNE PAS. NE RENVOI JAMAIS FALSE !!!!!!!
+			//echo $fichier;
+
+			/*if(file_exists($dossier.$verif['evts_img'])){
+				//unlink($dossier.$verif['evts_img']);
+				echo'il y IMG';
+			}
+			else{
+				//throw new Exception('pas d\'img');
+				echo 'Pas d\'img';
+			}*/
+
 
 
 	if($req==false){
@@ -341,6 +361,16 @@ function eventModifPage(){
 		if($resultat['id_creator']==$_SESSION['id']){
 
 			$types= $eventsManager->getAllType();
+
+			/*$date1=$eventsManager->getEventDate($_GET['id']);
+
+			if ($date1==false){
+				throw new Exception('Impossible de récupérer la date de l\'évènement');
+			}
+			else{
+
+				$eventDate=$date1->fetch();
+			}*/
 			
 			require('App/view/Frontend/modifEventView.php');
 		}
@@ -357,6 +387,7 @@ function eventModifPage(){
 function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity, $newEventType, $newEventDescript){
 
 	$eventsManager= new EventsManager();
+
 
 
 	if(isset($_FILES['eventPic']['tmp_name']) && $_FILES['eventPic']['name']!==""){
@@ -389,6 +420,21 @@ function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity
 
      		$fichier = strtr($fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
      		$fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+
+
+
+     		//Suppression de l'ancienne image si il y en a une
+     		$img=$eventsManager->verifyImg($_GET['id']);
+
+			$verif=$img->fetch();
+
+
+			if($verif['evts_img']!==""){                            //PK LA FONCTION file_exists() NE FONCTIONNE PAS ????
+				unlink($dossier.$verif['evts_img']);
+			}
+			
+
+
 
      		$success=move_uploaded_file($_FILES['eventPic']['tmp_name'], $dossier . $fichier);
 

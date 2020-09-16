@@ -19,9 +19,7 @@
 	</tr>
 <?php 
 
-while($data=$req->fetch())
-{
-?>
+while($data=$req->fetch()):?>
 	<tr>
 		<td id="dateTable"><?php echo htmlspecialchars($data['date_commentaire_fr']); ?></td>
 		<td id="authorTable"><?php echo htmlspecialchars($data['name']); ?></td>
@@ -33,12 +31,10 @@ while($data=$req->fetch())
 		</td> 
 	</tr>
 	
-<?php	
-}
+<?php endwhile;?>
 
-$req->closeCursor();
+<?php $req->closeCursor();?>
 
-?>
 </table>
 
 </section>

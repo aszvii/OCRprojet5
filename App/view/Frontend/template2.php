@@ -46,34 +46,33 @@
 				
 
 					<div id="profilMenu">
-<?php 
-if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])){
-?>
+
+<?php if (isset($_SESSION['id']) && isset($_SESSION['pseudo'])):?>
 
 						<a id="profilMenuLink" href=""><i class="fas fa-user-circle"></i></a>
 
 						<ul id="profilMenuRoll">
 							<li><i id="closeMenu" class="fas fa-window-close"></i></li>
 							<!--<a href=""><li>Modifier mon profil</li></a>-->
+							<li><a href="index.php">Accueil</a></li>
 							<a href="index.php?action=eventCreation"><li>Créer un évènement</li></a>
 
-							<?php 	if($_SESSION['type']==0){?>
+							<?php if($_SESSION['type']==0):?>
+
 										<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
-							<?php 	}
-									elseif($_SESSION['type']==1){?>
+
+							<?php elseif($_SESSION['type']==1):?>
 							
 										<li><a href="index.php?action=admin">Administration</a></li>
-							<?php 	}?>
+
+							<?php endif;?>
 
 							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
 						</ul>
 
 					</div>
 
-<?php
-}
-else{
-?>			
+<?php else:?>			
 					<div>
 
 						<p><a href="index.php?action=register">s'inscrire</a></p>
@@ -81,9 +80,7 @@ else{
 
 					</div>
 
-<?php
-}
-?>
+<?php endif;?>
 
 				</div>
 
@@ -101,9 +98,11 @@ else{
 
 
 
-		<?php if(isset($_SESSION['id'])){ ?>
+		<?php if(isset($_SESSION['id'])): ?>
+
 			<script src="App/javascript/p5.js"></script>
-		<?php } ?>
+
+		<?php endif; ?>
 		
 
 		</body>

@@ -62,10 +62,6 @@
 		<p class="seeEvtsLinkPost"><a href="index.php?action=event&id=<?=$data['id']?>">Voir l'évènement</a></p>
 	</div>
 
-	
-
-
-
 
 <?php endwhile; ?>
 

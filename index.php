@@ -16,7 +16,7 @@ try{
 
 		if($_GET['action']=='listEvents'){
 
-			listEvents();
+			listEventsPerPage();
 		}
 
 
@@ -401,8 +401,7 @@ try{
 
 
 	else{
-		listEvents();
-		//listEventsPerPage();
+		listEventsPerPage();
 	}
 
 }
