@@ -165,6 +165,8 @@ function event(){
 
 		$deadLine= time() + (4*24*60*60);
 
+		
+
 		require('App/view/Frontend/eventView.php');
 	}
 

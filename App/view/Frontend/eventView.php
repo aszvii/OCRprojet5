@@ -36,6 +36,11 @@
 
 	<div class="eventPost">
 
+
+        <h3><?= $data['evts_title'] ?></h3>
+
+
+
 <?php       $eventTime= strtotime($data['evts_date']);
 
             $dayStart=strtotime('midnight');
@@ -55,22 +60,25 @@
 
             <h3>Prévision météo pour l'évènement:</h3>
 
-            <div id="imgMeteo">
-                <p <?php if($eventTime>$dayStart && $eventTime<$day0 ):?>class="day0"
-                    <?php elseif($eventTime>$day0 && $eventTime<$day1):?> class="day1"
-                    <?php elseif($eventTime>$day1 && $eventTime<$day2):?> class="day2" 
-                    <?php elseif($eventTime>$day2 && $eventTime<$day3):?> class="day3" 
-                    <?php elseif($eventTime>$day3 && $eventTime<$dayMax):?> class="day4"
-                    <?php endif;?> id="day"></p>
+            <div  id="meteoContent">
+                <div id="imgMeteo">
+                    <p <?php if($eventTime>$dayStart && $eventTime<$day0 ):?>class="day0"
+                        <?php elseif($eventTime>$day0 && $eventTime<$day1):?> class="day1"
+                        <?php elseif($eventTime>$day1 && $eventTime<$day2):?> class="day2" 
+                        <?php elseif($eventTime>$day2 && $eventTime<$day3):?> class="day3" 
+                        <?php elseif($eventTime>$day3 && $eventTime<$dayMax):?> class="day4"
+                        <?php endif;?> id="day"></p>
 
-                <img id="dayImg" src=""/>
+                    <p id="meteoCity"></p>
 
-                <div id="temp">
-                    <p>Max: <em id="tMax"></em></p>
-                    <p >Min: <em id="tMin"></em></p>
-                </div>
-            </div>   
-           
+                    <img id="dayImg" src=""/>
+
+                    <div id="temp">
+                        <p>Max: <em id="tMax"></em></p>
+                        <p >Min: <em id="tMin"></em></p>
+                    </div>
+                </div>   
+            </div>
         </div>
 
 <?php else:?>
@@ -81,7 +89,6 @@
 
 
 
-        <h3><?= $data['evts_title'] ?></h3>
 
 
 <?php if($data['evts_img']!==""):?>

@@ -41,24 +41,25 @@
 
 <?php if(isset($_SESSION['id']) && isset($_SESSION['type'])): ?>
 
-						<a id="profilMenuLink" href=""><i class="fas fa-user-circle"></i></a>
+						<a id="profilMenuLink" href=""><i class="fas fa-bars"></i></a>
 
-						<ul id="profilMenuRoll">
-							<li><i id="closeMenu" class="fas fa-window-close"></i></li>
-							<!--<li><a href="">Modifier mon profil</a></li>-->
-							<li><a href="index.php">Accueil</a></li>
-							<li><a href="index.php?action=eventCreation">Créer un évènement</a></li>
+						<nav class="navMenu">
+							<ul id="profilMenuRoll">
+								<li><i id="closeMenu" class="fas fa-window-close"></i></li>
+								<li><a href="index.php">Accueil</a></li>
+								<li><a href="index.php?action=eventCreation">Créer un évènement</a></li>
 
-							<?php if($_SESSION['type']==0):?>
+								<?php if($_SESSION['type']==0):?>
 										<li><a href="index.php?action=showEventsInscription">Mon agenda</a></li>
-							<?php elseif($_SESSION['type']==1):?>
+								<?php elseif($_SESSION['type']==1):?>
 							
 										<li><a href="index.php?action=admin">Administration</a></li>
 
-							<?php endif;?>
+								<?php endif;?>
 
-							<li><a href="index.php?action=disconnect">Déconnexion</a></li>
-						</ul>
+								<li><a href="index.php?action=disconnect">Déconnexion</a></li>
+							</ul>
+						</nav>
 
 <?php else: ?>
 
@@ -102,7 +103,7 @@
 
 		<?php if(isset($_SESSION['id'])): ?>
 
-			<script src="App/javascript/p5.js"></script>
+			<script src="App/javascript/menu.js"></script>
 			
 		<?php endif; ?>
 		

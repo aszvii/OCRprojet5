@@ -45,7 +45,7 @@
 
 </section>
 
-
+<script src="App/javascript/agenda.js"></script>
 
 <?php $content= ob_get_clean(); ?>
 
