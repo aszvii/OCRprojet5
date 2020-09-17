@@ -58,7 +58,7 @@
 	    </div>
 
 
-	   	<input type="submit" name="envoyer" value="Créer évènement">
+	   	<input id="submitInput" type="submit" name="envoyer" value="Créer évènement">
 	   
 
     </form>

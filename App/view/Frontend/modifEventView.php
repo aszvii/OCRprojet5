@@ -56,12 +56,19 @@
 	    <div id="picEvent">
     
      			<input type="hidden"  name="MAX_FILE_SIZE" value="2000000">
-     			<label for="eventPic">Photo (facultatif) <em>(max size: 2Mo)</em>: <input type="file" id="eventPic" name="eventPic"></p>
+     			<label for="eventPic">Photo (facultatif) <em>(max size: 2Mo)</em>:</label><input type="file" id="eventPic" name="eventPic"></p>
+     				
+
+     		<?php if($resultat['evts_img']!==""):?>
+
+     			<p id="deleteImgLink"><a href="index.php?action=deleteImg&id=<?=$resultat['id']?>">supprimer l'image de l'évènement</a></p>
+
+     		<?php endif;?>
 	
 	    </div>
 
 
-	   	<input type="submit" value="Modifier évènement">
+	   	<input id="submitInput" type="submit" value="Modifier évènement">
 	   
 
     </form>

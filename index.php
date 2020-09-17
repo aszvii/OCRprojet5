@@ -81,9 +81,9 @@ try{
 
 
 
-		elseif($_GET['action']=='addImg'){
+		/*elseif($_GET['action']=='addImg'){
 			addImg();
-		}
+		}*/
 
 
 
@@ -120,6 +120,15 @@ try{
 			}
 			else{
 				throw new Exception('Connectez vous pour modifier un évènement !');
+			}
+		}
+
+
+		elseif($_GET['action']=="deleteImg"){
+			if(isset($_SESSION['id'])){
+				if(isset($_GET['id'])){
+					deleteImg();
+				}
 			}
 		}
 

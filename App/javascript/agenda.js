@@ -48,13 +48,41 @@ class Agenda{
 	}
 
 
-	/*over(){
+	overRight(){
 
-		if(this.rightChoice.style.opacity=="0.5"){
-			this.rightChoice.style.backgroundColor=="white";
-			console.log('over');
+		if(this.rightChoice.style.opacity!=="1"){
+			this.rightChoice.style.backgroundColor="white";
+			console.log(this.rightChoice.style.opacity);
 		}
-	}*/
+	}
+
+
+
+	leaveRight(){
+
+		if(this.rightChoice.style.opacity!=="1"){
+			this.rightChoice.style.backgroundColor="RGB(229, 223, 221)";
+		}
+	}
+
+
+
+	overLeft(){
+
+		if(this.leftChoice.style.opacity=="0.5"){
+			this.leftChoice.style.backgroundColor="white";
+			console.log(this.leftChoice.style.opacity);
+		}
+	}
+
+
+
+	leaveLeft(){
+
+		if(this.leftChoice.style.opacity=="0.5"){
+			this.leftChoice.style.backgroundColor="RGB(229, 223, 221)";
+		}
+	}
 
 
 }
@@ -90,9 +118,27 @@ rightSelector.addEventListener("click", function(){
 
 
 
-/*rightSelector.addEventListener("mouseover", function(){
+rightSelector.addEventListener("mouseover", function(){
 
-	agendaView.over();
-})*/
+	agendaView.overRight();
+})
 
+
+leftSelector.addEventListener("mouseover", function(){
+
+	agendaView.overLeft();
+})
+
+
+
+rightSelector.addEventListener("mouseleave", function(){
+
+	agendaView.leaveRight();
+})
+
+
+leftSelector.addEventListener("mouseleave", function(){
+
+	agendaView.leaveLeft();
+})
 

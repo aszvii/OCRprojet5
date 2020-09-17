@@ -503,6 +503,58 @@ function modifEvent($newEventTitle, $newEventDate, $newEventPlace, $newEventCity
 
 
 
+function deleteImg(){
+
+	$eventsManager= new EventsManager();
+
+	$req= $eventsManager->getEvent($_GET['id']);
+
+
+	if($req==false){
+
+		throw new Exception('Impossible d\'effectuer la requête');
+	}
+	else{
+
+		$event=$req->fetch();
+
+		$dossier = 'upload/';
+
+     	$fichier = $event['evts_img'];
+
+
+
+		if($event['id_creator']==$_SESSION['id']){
+
+			if($fichier!==""){ 
+
+				$del=$eventsManager->deleteImage($_GET['id']);
+
+				if($del==false){
+					throw new Exception('Impossible de supprimer l\'image');
+				}  
+				else{
+					unlink($dossier.$event['evts_img']);
+				} 
+			}
+			else{
+
+				throw new Exception('Ce évènement n\'a pas d\'image');
+				
+			}
+
+			header("Location: index.php?action=eventModification&id=".$_GET['id']);
+		}
+		else{
+			throw new Exception('Vous n\'avez pas le droit d\'effecture cette action');
+		}
+		
+	}
+
+}
+
+
+
 
 function deleteEvent(){
 

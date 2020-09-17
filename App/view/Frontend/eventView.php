@@ -158,7 +158,7 @@
                     <div id="eventCommentsContent">
 
     <?php if($comments->rowCount()==0):?>
-            <p>Soyez le premier à commenter cet article</p>;
+            <p>Soyez le premier à commenter cet article</p>
         
     <?php else:?>
 
@@ -198,7 +198,7 @@
 
 <?php if(!isset($_SESSION['id'])):?>
     
-  <p id="connectToComment"><a href="index.php?action=connect">Connectez vous pour commenter</a></p>
+  <p id="connectToComment"><a href="index.php?action=connect">Connectez vous pour vous inscrire ou commenter</a></p>
 
 <?php endif; ?>
 

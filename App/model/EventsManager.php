@@ -186,6 +186,18 @@ class EventsManager extends Manager
 
 
 
+	public function deleteImage($eventId){
+
+		$db=$this->dbConnect();
+
+		$req=$db->prepare('UPDATE events SET evts_img="" WHERE id=?');
+		$req->execute(array($eventId));
+
+		return $req;
+	}
+
+
+
 	public function getEventDate($eventId){
 
 		$db=$this->dbConnect();

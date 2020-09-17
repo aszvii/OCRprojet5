@@ -74,12 +74,11 @@
 					</div>
 
 <?php else:?>			
-					<div>
+						
 
 						<p><a href="index.php?action=register">s'inscrire</a></p>
 						<p><a href="index.php?action=connect">se connecter</a></p>
 
-					</div>
 
 <?php endif;?>
 
