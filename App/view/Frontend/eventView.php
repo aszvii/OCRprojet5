@@ -11,6 +11,13 @@
 
 <section id="postSection">
 
+    <div id="returnDiv">
+        
+        <p class="returnLink"><a href="index.php">Retour à la liste des évènements</a></p>
+
+    </div>
+
+
 <?php if (isset($_SESSION['type']) && $_SESSION['type']==0): ?>
 
     <div id="inscriptionButton">

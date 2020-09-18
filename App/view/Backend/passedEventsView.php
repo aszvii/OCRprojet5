@@ -8,6 +8,14 @@
 
 <section id="postSection">
 
+	<div id="returnDiv">
+		
+		<p class="returnLink"><a href="index.php?action=admin">Retour à la page d'administration</a></p>
+
+	</div>
+
+	
+
 	<h2>Évènement(s) terminé(s)</h2>
 
 

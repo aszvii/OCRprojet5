@@ -7,6 +7,15 @@
 
 <section id="signalComViewDiv">
 
+
+	<div id="returnDiv">
+		
+		<p class="returnLink"><a href="index.php?action=admin">Retour à la page d'administration</a></p>
+
+	</div>
+
+	
+
 <h1> Commentaires signalés</h1>
 
 

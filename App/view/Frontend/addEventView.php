@@ -4,6 +4,13 @@
 
 <section id="addModifEventDiv">
 
+	<div id="returnDiv">
+		
+		<p class="returnLink"><a href="index.php">Retour à la page d'accueil</a></p>
+
+	</div>
+
+
     <h1>Créer un évènement</h1>
 
 

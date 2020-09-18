@@ -4,6 +4,12 @@
 
 <section id="addModifEventDiv">
 
+	<div id="returnDiv">
+		
+		<p class="returnLink"><a href="index.php?action=showEventsInscription">Retour à "mon agenda"</a></p>
+
+	</div>
+
     <h1>Modifier un évènement</h1>
 
 

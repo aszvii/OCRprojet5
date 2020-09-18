@@ -12,6 +12,7 @@
 
 <section id="participateSection">
 
+
 <?php while ($events=$req->fetch()): ?>
 
     <div class="evtsPost">
@@ -29,6 +30,7 @@
 
 
 <section id="organisedSection">
+
 
 <?php while ($events2=$req2->fetch()): ?>
 

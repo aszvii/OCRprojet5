@@ -1303,3 +1303,69 @@ table td{
 		border-bottom: 2px solid black;
 	}
 }
+
+
+
+
+/* ERROR TEMPLATE */
+
+
+#errorHtml{
+	height: 100%;
+}
+
+
+#errorBody{
+	padding: 10px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: orange;
+}
+
+
+#bodyHeader{
+	padding-top: 0px;
+}
+
+
+
+#errorContent {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#errorContent p{
+	background-color: white;
+	font-size: 30px;
+	padding: 20px;
+	text-align: center;
+}
+
+
+#errorContent em{
+	color: red;
+	font-weight: bold;
+}
+
+
+
+
+/*LIEN DE RETOUR*/
+
+
+#returnDiv{
+	align-self: flex-start;
+	padding-left: 10px;
+}
+
+
+.returnLink a{
+	color: blue;
+}
+
+.returnLink a:hover{
+	color: black;
+}
