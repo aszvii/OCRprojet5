@@ -5,27 +5,12 @@
 require('vendor/autoload.php');
 
 use App\model\EventsManager;
+use App\model\EventsInscriptionManager;
+use App\model\EventsTypeManager;
 use App\model\CommentsManager;
 use App\model\UserManager;
 
 
-function listEvents(){
-
-	$eventsManager = new EventsManager();   
-
-	$req=$eventsManager->getEvents();
-
-
-	if($req ==false){
-		echo 'Impossible d\'afficher les évènements';
-	}
-	else{
-
-		require('App/view/Frontend/listEventsView.php');
-
-	}
-
-}
 
 
 function listEventsPerPage(){
@@ -49,7 +34,6 @@ function listEventsPerPage(){
     		$currentPage = 1;
 		}
 
-		//var_dump($currentPage);
 
 
 
@@ -81,55 +65,6 @@ function listEventsPerPage(){
 
 	}
 
-
-
-
-
-
-
-	//On récupère la valeur du paramètre page
-	/*if(isset($_GET['page']) && !empty($_GET['page'])){
-    	$currentPage = (int) strip_tags($_GET['page']);
-	}
-	else{
-    	$currentPage = 1;
-	}
-
-	//On récupère le nombre d'évènement dans la table events
-	
-
-	if($result==false){
-		throw new Exception('Impossible d\'obtenir le nombre d\'évènements');	
-	}
-	else{
-
-		$result2=$result->fetch();
-		
-		$nbEvents= (int) $result2['nb_events'];
-
-		//Nombre d'article qu'on souhaite affiché par page
-		$perPage=5;
-
-		//Calcul du nombre total de page nécessaire
-		$pages= ceil($nbEvents / $perPage);
-
-
-		//Calcul du premier article de la page
-		$first= ($currentPage * $perPage) - $perPage ;
-
-
-
-  		$req=$eventsManager->getEvents($first, $perPage);
-
-
-		if($req ==false){
-			echo 'Impossible d\'afficher les évènements';
-		}	
-		else{
-			require('App/view/Frontend/listEventsView.php');
-		}
-  	}*/
-
 }
 
 
@@ -138,6 +73,7 @@ function event(){
 
 	$eventsManager = new EventsManager();
 	$commentsManager= new CommentsManager();
+	$eventsInscriptionManager= new EventsInscriptionManager();
 
 
 	$req=$eventsManager->getEvent($_GET['id']);
@@ -146,12 +82,12 @@ function event(){
 
 
 
-	$registered=$eventsManager->getEventRegisteredMembers($_GET['id']);
+	$registered=$eventsInscriptionManager->getEventRegisteredMembers($_GET['id']);
 
 
 
 	if(isset($_SESSION['id'])){
-		$verif=$eventsManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
+		$verif=$eventsInscriptionManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
 	}
 
 
@@ -177,10 +113,11 @@ function event(){
 function searchEventPerType($eventType){
 
 	$eventsManager= new EventsManager();
+	$eventsTypeManager= new EventsTypeManager();
 
 	$req= $eventsManager->getEventPerType($eventType);
 
-	$type=$eventsManager->getType($eventType);
+	$type=$eventsTypeManager->getType($eventType);
 
 
 	if($req==false  || $type==false){
@@ -217,7 +154,6 @@ function searchEventPerCity($eventCity){
 			else{
 				require('App/view/Frontend/searchCityEventView.php');
 			}
-
 			
 	}
 
@@ -227,9 +163,9 @@ function searchEventPerCity($eventCity){
 
 function eventCreation(){
 
-	$eventsManager= new EventsManager();
+	$eventsTypeManager= new EventsTypeManager();
 
-	$types=$eventsManager->getAllType();
+	$types=$eventsTypeManager->getAllType();
 
 	if($types==false){
 		throw new Exception('Erreur lors de la requête');
@@ -240,20 +176,6 @@ function eventCreation(){
 }
 
 
-/*function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventType, $eventDescript){
-
-	$eventsManager= new EventsManager();
-
-	$req=$eventsManager->addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventType, $eventDescript);
-
-
-	if($req==false){
-		throw new Exception('Impossible d\'ajouter l\'évènement');
-	}
-	else{
-		header('Location: index.php');
-	}
-}*/
 
 
 
@@ -332,6 +254,8 @@ function addEvent($eventCreator, $eventTitle, $eventDate, $eventPlace, $eventCit
 function eventModifPage(){
 
 	$eventsManager= new EventsManager();
+	$eventsTypeManager= new EventsTypeManager();
+
 
 	$req= $eventsManager->getEvent($_GET['id']);
 
@@ -362,17 +286,7 @@ function eventModifPage(){
 
 		if($resultat['id_creator']==$_SESSION['id']){
 
-			$types= $eventsManager->getAllType();
-
-			/*$date1=$eventsManager->getEventDate($_GET['id']);
-
-			if ($date1==false){
-				throw new Exception('Impossible de récupérer la date de l\'évènement');
-			}
-			else{
-
-				$eventDate=$date1->fetch();
-			}*/
+			$types= $eventsTypeManager->getAllType();
 			
 			require('App/view/Frontend/modifEventView.php');
 		}
@@ -604,13 +518,13 @@ function signalEvent(){
 
 function eventInscription(){
 
-	$eventsManager= new EventsManager();
+	$eventsInscriptionManager= new EventsInscriptionManager();
 
-	$verif=$eventsManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
+	$verif=$eventsInscriptionManager->verifMemberEventInscription($_SESSION['id'], $_GET['id']);
 
 	if ($verif->rowCount()==0){
 
-		$req=$eventsManager->eventInscription($_SESSION['id'], $_GET['id']);
+		$req=$eventsInscriptionManager->eventInscription($_SESSION['id'], $_GET['id']);
 
 		if($req==false){
 			throw new Exception('Impossible de s\'inscrire à cet évènement');
@@ -629,9 +543,9 @@ function eventInscription(){
 
 function deleteInscription(){
 
-	$eventsManager= new EventsManager();
+	$eventsInscriptionManager= new EventsInscriptionManager();
 
-	$req=$eventsManager->deleteInscription($_GET['id']);
+	$req=$eventsInscriptionManager->deleteInscription($_GET['id']);
 
 	if($req==false){
 		throw new Exception('Impossible de vous désinscrire');
@@ -647,13 +561,14 @@ function deleteInscription(){
 function showEventsInscription(){
 
 	$eventsManager= new EventsManager();
+	$eventsInscriptionManager= new EventsInscriptionManager();
 
-	$req=$eventsManager->getMemberEventsInscription($_SESSION['id']);
+	$req=$eventsInscriptionManager->getMemberEventsInscription($_SESSION['id']);
 
 	$req2=$eventsManager->getCreateEvents($_SESSION['id']);
 
 	if($req==false || $req2==false){
-		throw new Exception('Impossible de d\'afficher les évènements');
+		throw new Exception('Impossible de d\'afficher la page');
 	}
 	else {
 		require('App/view/Frontend/agendaView.php');

@@ -22,7 +22,7 @@
 <?php while ($data=$req->fetch()): ?>
 
 	<div class="evtsPost" id="cible">
-		<p class="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?> (<?=$data['evts_city']?>), le <?= $data['date_evts_fr'] ?></em></p>
+		<p class="evtsPlaceDate">...à <em><?= $data['evts_place'] ?> (<?=$data['evts_city']?>), le <?= $data['date_evts_fr'] ?></em></p>
 		<h3 class="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= $data['evts_title'] ?></a></h3>
 		<div class="postDescript"><?= $data['evts_description'] ?></div>
 		<p class="seeEvtsLinkPost"><a id="deleteEventLink" href="index.php?action=deletePassedEvent&id=<?=$data['id']?>">Supprimer</a></p>

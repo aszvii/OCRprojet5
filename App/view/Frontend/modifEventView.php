@@ -21,7 +21,7 @@
 
 	    <div class="formDiv">
 
-			<label for="dateHour">Date et Heure:</label><input type="datetime-local" id="dateHour" name="dateHour" value="">
+			<label for="dateHour">Date et Heure:</label><input type="datetime-local" id="dateHour" name="dateHour" value="<?=$resultat['date_evts_us']?>">
 			
 	    </div>
 
@@ -39,12 +39,15 @@
 			<select name="type" id="type">
 				<option value="">--Choisissez un type d'évènement--</option>
 
-
-
    			
-<?php while ($type=$types->fetch()): ?>
+<?php while ($type=$types->fetch()): ?>													
 
-					<option value="<?= $type['id']?>" > <?=$type['type_name']?> </option>
+				<?php if($type['id']== $resultat['evts_type']):?>
+					<option value="<?= $type['id']?>" selected> <?=$type['type_name']?> </option>
+				<?php else:?>
+					<option value="<?= $type['id']?>"> <?=$type['type_name']?> </option>
+
+				<?php endif;?>
 
 <?php endwhile; ?>
 

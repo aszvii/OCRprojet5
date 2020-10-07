@@ -68,7 +68,7 @@ try{
 		elseif($_GET['action']=="addEvent"){
 			if(isset($_SESSION['id'])){
 				if(!empty($_POST['title']) && !empty($_POST['dateHour']) && !empty($_POST['place']) && !empty($_POST['city']) && !empty($_POST['type']) && !empty($_POST['description'])){
-					addEvent($_SESSION['id'], htmlspecialchars($_POST['title']), $_POST['dateHour'], $_POST['place'], $_POST['city'], $_POST['type'], $_POST['description']);
+					addEvent($_SESSION['id'], htmlspecialchars($_POST['title']), $_POST['dateHour'], htmlspecialchars($_POST['place']), htmlspecialchars($_POST['city']), $_POST['type'], $_POST['description']);
 				}
 				else{
 					throw new Exception('Veuillez remplir tous les champs');
@@ -108,7 +108,7 @@ try{
 			if(isset($_SESSION['id'])){
 				if(isset($_GET['id'])){
 					if(!empty($_POST['title']) && !empty($_POST['dateHour']) && !empty($_POST['place']) && !empty($_POST['city']) && !empty($_POST['type']) && !empty($_POST['description'])){
-						modifEvent(htmlspecialchars($_POST['title']), $_POST['dateHour'], $_POST['place'],  $_POST['city'], $_POST['type'], $_POST['description']);
+						modifEvent(htmlspecialchars($_POST['title']), $_POST['dateHour'], htmlspecialchars($_POST['place']),  htmlspecialchars($_POST['city']), $_POST['type'], $_POST['description']);
 					}
 					else{
 						throw new Exception('Veuillez remplir tous les champs');
@@ -416,6 +416,5 @@ try{
 }
 catch(Exception $e){
 
-	//echo 'Erreur: '. $e->getMessage();
 	require('App/view/frontend/templateError.php');
 }

@@ -50,7 +50,7 @@
 <?php while ($data=$req->fetch()): ?>
 
 	<div class="evtsPost">
-		<p class="evtsPlaceDate">...à <em><?= htmlspecialchars($data['evts_place']) ?> (<?=$data['evts_city']?>), le <?= $data['date_evts_fr'] ?></em></p>
+		<p class="evtsPlaceDate">...à <em><?= $data['evts_place'] ?> (<?=$data['evts_city']?>), le <?= $data['date_evts_fr'] ?></em></p>
 		<h3 class="evtsPostTitle"><a href="index.php?action=event&id=<?=$data['id']?>"><?= $data['evts_title'] ?></a></h3>
 		<div class="postDescript"><?= $data['evts_description'] ?></div>
 		<p class="seeEvtsLinkPost"><a href="index.php?action=event&id=<?=$data['id']?>">Voir l'évènement</a></p>
@@ -71,13 +71,13 @@
         </li>
 
         <?php for($page = 1; $page <= $pages; $page++): ?>
-           <!--COMMENTAIRE Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+           <!--Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
             <li class="page-item <?php if($currentPage==$page):?> disableLink <?php endif;?>">
                 <a href="index.php?action=listEvents&page=<?= $page ?>" class="page-link <?php if($currentPage==$page):?> firstLastPage <?php endif;?>"><?= $page ?></a>
             </li>
         <?php endfor; ?>
 
-           <!-- COMMENTAIRELien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+           <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
         <li class="page-item <?php if($currentPage==$pages):?> disableLink <?php endif;?>">
             <a href="index.php?action=listEvents&page=<?= $currentPage + 1 ?>" class="page-link <?php if($currentPage==$pages):?> firstLastPage <?php endif;?>">Suivante</a>
         </li>

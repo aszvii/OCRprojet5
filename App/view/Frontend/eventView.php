@@ -27,7 +27,7 @@
             <p><a id="inscriptionLink" href="index.php?action=eventInscription&id=<?= $data['id'] ?>">Je souhaites participer à cet évènement</a></p>
 
     <?php else:?>
-            <?php $inscript=$verif->fetch() ?>
+    <?php $inscript=$verif->fetch() ?>
 
             <p><a id="deleteInscriptionLink" href="index.php?action=deleteInscription&id=<?=$inscript['id']?>&event=<?=$data['id']?>">Je ne veux plus y participer</a></p>
 
@@ -108,7 +108,7 @@
         
 
         <div class="eventPostContent">
-            <p>Lieu: <em><?= htmlspecialchars($data['evts_place']) ?> (<span id="City"><?=$data['evts_city']?></span>)</em></p>
+            <p>Lieu: <em><?= $data['evts_place'] ?> (<span id="City"><?=$data['evts_city']?></span>)</em></p>
             <p>Date et Heure: <em>le <?= $data['date_evts_fr'] ?></em></p>
             <p>type d'évènement: <em><?= $data['type_name'] ?></em></p>
             <p>Organisé par: <em><?= $data['name'] ?></em></p><br/>
@@ -175,20 +175,15 @@
                             <p><strong><?php echo htmlspecialchars($comment['name']); ?></strong><em class="postCommentDate"> le <?php echo $comment['date_commentaire_fr']; ?></em></p>
 
 
+                             <p id="<?=$comment['comment']?>"><?php echo $comment['comment']; ?></p>
+
+
                 <?php if(isset($_SESSION['id'])): ?>
 
                             <a id="signalLink" href="index.php?action=signalComment&id=<?=$comment['id']?>&event=<?=$data['id']?>">(signaler)</a>
 
                 <?php endif;?>
 
-
-                <?php if(isset($_SESSION['id']) && $_SESSION['type']==1):?>
-
-                            <a id="deleteLink" href="index.php?action=deleteComment&id=<?=$comment['id']?>&post=<?=$post['id']?>">(Supprimer)</a>
-
-                <?php endif;?>
-
-            	           <p id="<?=$comment['comment']?>"><?php echo $comment['comment']; ?></p>
 
                         </div>
 

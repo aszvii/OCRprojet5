@@ -30,7 +30,7 @@
 
 while($data=$req->fetch()):?>
 	<tr>
-		<td id="dateTable"><?php echo htmlspecialchars($data['date_commentaire_fr']); ?></td>
+		<td id="dateTable"><?php echo $data['date_commentaire_fr']; ?></td>
 		<td id="authorTable"><?php echo htmlspecialchars($data['name']); ?></td>
 		<td><?php echo cutComment($data['comment'], $data['id_evts'], $data['comment']);?></td>
 

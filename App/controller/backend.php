@@ -9,7 +9,7 @@ use App\model\CommentsManager;
 
 
 
-//fonction administrateur
+
 function admin(){
 	require('App/view/Backend/adminView.php');
 }
@@ -17,8 +17,6 @@ function admin(){
 
 
 
-
-//fonction administrateur
 function listPassedEvents(){
 
 	$eventsManager = new EventsManager();   
@@ -38,7 +36,6 @@ function listPassedEvents(){
 
 
 
-//fonction administrateur
 function deletePassedEvent(){
 
 	$eventsManager= new EventsManager();
@@ -57,7 +54,7 @@ function deletePassedEvent(){
 
 
 
-//fonction administrateur
+
 function showSignalComment(){
 
 	$commentsManager= new CommentsManager();
@@ -74,7 +71,7 @@ function showSignalComment(){
 }
 
 
-//fonction administrateur
+
 function deleteComment(){
 
 	$commentsManager= new CommentsManager();
@@ -93,7 +90,7 @@ function deleteComment(){
 
 
 
-//fonction administrateur
+
 function cancelSignalComment(){
 
 	$commentsManager= new CommentsManager();
@@ -111,7 +108,7 @@ function cancelSignalComment(){
 
 
 
-//fonction administrateur
+
 function getSignalEvent(){
 
 	$eventsManager= new EventsManager();
@@ -130,7 +127,7 @@ function getSignalEvent(){
 
 
 
-//fonction administrateur
+
 function cancelSignalEvent(){
 	$eventsManager= new EventsManager();
 
@@ -146,7 +143,7 @@ function cancelSignalEvent(){
 
 
 
-//fonction administrateur
+
 function deleteSignalEvent(){
 
 	$eventsManager= new EventsManager();

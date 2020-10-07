@@ -82,22 +82,6 @@ footer{
 }
 
 
-/*#listMenuRoll{
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	list-style-type: none;
-	margin: 0px;
-	padding: 0px;
-	font-size: 25px;
-	text-align: center;
-	border-top: 1px solid white;
-	border-right: 1px solid white;
-	border-bottom: 1px solid white;
-	background-color: black;
-	min-width: 250px;
-}*/
 
 #profilMenuRoll i{
 	color: orange;
@@ -337,6 +321,7 @@ footer{
 }
 
 #postSection h2, #searchSection h2{
+	text-align: center;
 	font-size: 35px;
 	color: black;
 }
@@ -715,6 +700,7 @@ footer{
 
 
 
+
 /* REGISTERVIEW 1 CONNECTIONVIEW */
 
 #connectionDiv, #registerDiv{
@@ -1012,6 +998,7 @@ footer{
 	font-size: 35px;
 	text-decoration: underline;
 	margin-bottom: 60px;
+	text-align: center;
 }
 
 
@@ -1155,6 +1142,7 @@ footer{
 #signalComViewDiv h1{
 	margin-top: 50px;
 	align-self: center;
+	text-align: center;
 }
 
 @media screen and (max-width: 750px){
